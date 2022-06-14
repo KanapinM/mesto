@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Место</title>
+    <link rel="stylesheet" href="pages/index.css">
+</head>
+
+<body>
+    <div class="page">
+        <div class="content">
+            <header class="header">
+                <img class="header__logo" src="./images/mesto.svg" alt="текстовый логтип Место Раша">
+            </header>
+
+            <main>
+                <section class="profile">
+                    <div class="profile__column">
+                        <img class="profile__avatar" src="./images/custo.jpg" alt="улыбающийся Кусто на фоне моря">
+                        <div class="profile__info">
+                            <div class="profile__edit">
+                                <h1 class="profile__name">Жак-Ив Кусто</h1>
+                                <button type="button" class="profile__edit-button"></button>
+                            </div>
+                            <p class="profile__interest">Исследователь океана</p>
+                        </div>
+                    </div>
+                    <button type="button" class="profile__add-button"></button>
+                </section>
+                <section class="elements">
+                    <div class="element">
+                        <img class="element__photo" src="./images/karachaevsk.jpg"
+                            alt="вид на горный Карачаевск разделенный рекой">
+                        <div class="element__place">
+                            <h2 class="element__tittle">Карачаевск</h2>
+                            <button type="button" class="element__like_disabled"></button>
+                        </div>
+                    </div>
+                    <div class="element">
+                        <img class="element__photo" src="./images/spb.jpg" alt="Исаакиевский собор">
+                        <div class="element__place">
+                            <h2 class="element__tittle">Санкт-Петербург</h2>
+                            <button type="button" class="element__like_disabled"></button>
+                        </div>
+                    </div>
+                    <div class="element">
+                        <img class="element__photo" src="./images/dagestan.jpg"
+                            alt="зеленые горы Дагестана с птичьего полета">
+                        <div class="element__place">
+                            <h2 class="element__tittle">Дагестан</h2>
+                            <button type="button" class="element__like_disabled"></button>
+                        </div>
+                    </div>
+                    <div class="element">
+                        <img class="element__photo" src="./images/karelia.jpg"
+                            alt="мраморный карьер наполненный лазурной водой">
+                        <div class="element__place">
+                            <h2 class="element__tittle">Карелия</h2>
+                            <button type="button" class="element__like_disabled"></button>
+                        </div>
+                    </div>
+                    <div class="element">
+                        <img class="element__photo" src="./images/kazan.jpg"
+                            alt="монументальное сооружение с куполами и колоннами фасад которого украшено бронзовым деревом">
+                        <div class="element__place">
+                            <h2 class="element__tittle">Казань</h2>
+                            <button type="button" class="element__like_disabled"></button>
+                        </div>
+                    </div>
+                    <div class="element">
+                        <img class="element__photo" src="./images/moscow-city.jpg" alt="вид на москоу-сити с воды">
+                        <div class="element__place">
+                            <h2 class="element__tittle">Москва</h2>
+                            <button type="button" class="element__like_disabled"></button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+            <footer class="footer">
+                    <p class="footer__copyright">© 2020 Mesto Russia</p>
+            </footer>
+            <div id="popup" class="popup popup_hidden">
+                <div class="popup__container">
+                    <h2 class="popup__title">Редактировать профиль</h2>
+                        <input type="text" class="popup__field popup__field_name" placeholder="Ваше Имя">
+                        <input type="text" class="popup__field popup__field_interest" placeholder="Интересы">
+                        <button type="submit" class="popup__save-button">Сохранить</button>
+                    <button type="button" class="popup__close-button"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./scripts/index.js"></script>
+</body>
+
+</html>

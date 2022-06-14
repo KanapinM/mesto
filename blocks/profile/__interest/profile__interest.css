@@ -1,0 +1,18 @@
+.profile__interest {
+    margin: 8px 0 0;
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+@media screen and (max-width: 1024px) {
+    .profile__interest {
+        margin: 8px auto 32px;
+        font-size: 14px;
+        line-height: 17px;
+        text-align: center;
+        max-width: 282px;
+    }
+}
