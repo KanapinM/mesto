@@ -1,4 +1,4 @@
-.element__like_disabled {
+.element__like-disabled {
     margin-right: 20px;
     min-width: 22px;
     height: 19px;
@@ -13,6 +13,6 @@
     transition: ease-in-out 0.3s;
 }
 
-.element__like_disabled:hover {
+.element__like-disabled:hover {
     opacity: 0.5;
 }
