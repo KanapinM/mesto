@@ -31,7 +31,6 @@ function sumbitForm(evt) {
 }
 
 edit.addEventListener('click', editProfile);
-
 popupCloseButton.addEventListener('click', closePopup);
 
 popup.addEventListener('click', function (e) {
