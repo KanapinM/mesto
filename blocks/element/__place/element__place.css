@@ -1,8 +1,8 @@
 .element__place {
+    padding: 25px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 79px;
     width: 282px;
     background-color: white;
     border-radius: 0 0 10px 10px;

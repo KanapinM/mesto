@@ -1,7 +1,7 @@
 .element__like-disabled {
     margin-right: 20px;
     min-width: 22px;
-    height: 19px;
+    min-height: 19px;
     background-image: url(../../../images/like-disabled.svg);
     background-size: cover;
     background-color: transparent;

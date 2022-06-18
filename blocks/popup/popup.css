@@ -1,7 +1,8 @@
 .popup {
+    padding: 155px 0;
+    margin-bottom: 8px;
     display: flex;
     position: fixed;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
     left: 0;
@@ -11,4 +12,11 @@
     z-index: 2;
     background: rgb(0, 0, 0, .50);
     overflow-y: auto;
+    visibility: hidden;
+}
+
+@media screen and (max-width: 767px) {
+    .popup {
+        padding: 87px 0;
+    }
 }
