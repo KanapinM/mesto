@@ -9,33 +9,27 @@ const profileInterest = document.querySelector('.profile__interest');
 
 
 function openPopup() {
-    popup.classList.add('popup_open');
+    popup.classList.add('popup_open'); /*открыть попап*/
 }
 
 function closePopup() {
-    popup.classList.remove('popup_open');
+    popup.classList.remove('popup_open');/*закрыть попап*/
 }
 
 function editProfile() {
     openPopup();
-    inputName.value = profileName.textContent;
-    inputInterest.value = profileInterest.textContent;
+    inputName.value = profileName.textContent;/*присваивание имени*/
+    inputInterest.value = profileInterest.textContent;/*присваивание активностей*/
 }
 
-function sumbitForm(evt) {
+function submitForm(evt) {
     evt.preventDefault();
-    profileName.textContent = inputName.value;
-    profileInterest.textContent = inputInterest.value;
+    profileName.textContent = inputName.value;/*замена имени на полученное*/
+    profileInterest.textContent = inputInterest.value;/*замена активностей на полученные*/
     closePopup();
 }
 
 edit.addEventListener('click', editProfile);
 popupCloseButton.addEventListener('click', closePopup);
 
-popup.addEventListener('click', function (e) {
-    if (e.target === e.currentTarget) {
-        closePopup();
-    }
-});
-
-popupForm.addEventListener('sumbit', sumbitForm);
+popupForm.addEventListener('submit', submitForm);
