@@ -6,7 +6,6 @@ const inputName = document.querySelector('.popup__input_name');
 const inputInterest = document.querySelector('.popup__input_interest');
 const profileName = document.querySelector('.profile__name');
 const profileInterest = document.querySelector('.profile__interest');
-const save = ('.popup__save-button');
 
 
 function openPopup() {
