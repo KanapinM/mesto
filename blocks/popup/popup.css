@@ -1,9 +1,9 @@
 .popup {
-    padding: 155px 0;
     margin-bottom: 8px;
     display: flex;
     position: fixed;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
     left: 0;
     top: 0;
@@ -13,10 +13,6 @@
     background: rgb(0, 0, 0, .50);
     overflow-y: auto;
     visibility: hidden;
-}
-
-@media screen and (max-width: 767px) {
-    .popup {
-        padding: 87px 0;
-    }
+    opacity: 0;
+    transition: ease-in-out 0.3s;
 }
