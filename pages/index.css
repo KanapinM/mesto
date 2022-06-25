@@ -36,8 +36,45 @@
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 
+.element__delete-button {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 18px;
+    min-height: 19px;
+    background-image: url(../images/delete-button.svg);
+    background-size: cover;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+}
 
+.element__delete-button:hover {
+    opacity: 0.5;
+}
 
+.element__like {
+    margin-right: 20px;
+    min-width: 22px;
+    min-height: 19px;
+    background-size: cover;
+    background-color: transparent;
+    border: none;
+    padding-top: 5px;
+    align-self: center;
+    padding: 0;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+}
+
+.element__like:hover {
+    opacity: 0.5;
+}
+
+.element__like-active {
+    background-image: url(../images/like-active.svg);
+}
 
 
 
