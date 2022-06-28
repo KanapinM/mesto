@@ -90,10 +90,10 @@
         </footer>
 
         <div id="popup" class="popup popup_type_edit-profile">
-            <button type="button" class="popup__close-button"></button>
+            <button type="button" class="popup__close-button popup__close-button_profile"></button>
             <div class="popup__container">
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form name="popup__form" class="popup__form">
+                <form name="popup__form" class="popup__form popup__form_type_profile">
                     <input type="text" class="popup__input popup__input_type_name" value="Ваше Имя">
                     <input type="text" class="popup__input popup__input_type_interest" value="Интересы">
                     <button type="submit" class="popup__save-button">Сохранить</button>
@@ -101,24 +101,24 @@
             </div>
         </div>
         <div id="popup" class="popup popup_type_add-place">
-            <button type="button" class="popup__close-button"></button>
+            <button type="button" class="popup__close-button popup__close-button_place"></button>
             <div class="popup__container">
                 <h2 class="popup__title">Новое место</h2>
-                <form name="popup__form" class="popup__form popup__form_type_profile">
-                    <input type="text" class="popup__input popup__input_type_place" value="Название">
-                    <input type="text" class="popup__input popup__input_type_photo" value="Ссылка на картинку">
-                    <button type="submit" class="popup__save-button">Создать</button>
+                <form name="popup__form" class="popup__form popup__form_type_place">
+                    <input type="text" class="popup__input popup__input_type_place" placeholder="Название">
+                    <input type="text" class="popup__input popup__input_type_photo" placeholder="Ссылка на картинку">
+                    <button type="submit" class="popup__create-button">Создать</button>
                 </form>
             </div>
         </div>
     </div>
     <script src="./scripts/index.js"></script>
-    <template id="element-template">
+    <template class="element-template">
         <article class="element">
             <button type="button" aria-label="delete" class="element__delete-button"></button>
             <img class="element__photo" src="./images/moscow-city.jpg" alt="вид на москоу-сити с воды">
             <div class="element__place">
-                <h2 class="element__tittle">Москва</h2>
+                <h2 class="element__tittle"></h2>
                 <button type="button" aria-label="like" class="element__like element__like-disabled"></button>
             </div>
         </article>
