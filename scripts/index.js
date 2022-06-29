@@ -20,9 +20,9 @@ const profileName = document.querySelector('.profile__name');
 const profileInterest = document.querySelector('.profile__interest');
 const inputPlace = document.querySelector('.popup__input_type_place');
 const inputPhoto = document.querySelector('.popup__input_type_photo');
-const elementTitle = document.querySelector('.element__tittle');
-const elementPhoto = document.querySelector('.element__photo');
-
+//const elementTitle = document.querySelector('.element__tittle');/
+//const elementPhoto = document.querySelector('.element__photo');
+const elementTemplate = document.querySelector('.element-template');
 
 
 function openPopup(popup) {
@@ -53,13 +53,13 @@ function addPlace() {
     openPopup(popupAddPlace);
 };
 
-function renderItem(text, href) {
-    const cardTemplate = document.querySelector('.element-template').content;/*дубль кода ниже */
+function renderElement(card) {
 
-    const newElement = cardTemplate.querySelector.cloneNode(true);
-    newTitle.querySelector('.element__tittle').innerText = text;
-    newPhoto.querySelector('.element__photo').innerText = href;
-    element.appendChild(cardElement);
+//    newElement.querySelector('.element__tittle').innerText = text;
+//    newPhoto.querySelector('.element__photo').innerText = href;
+
+    element.appendChild(card); 
+
 //    elements.insertAdjacentHTML('afterbegin', `
 //            <article class="element">
 //                 <button type="button" aria-label="delete" class="element__delete-button"></button>
@@ -72,14 +72,34 @@ function renderItem(text, href) {
 //                    `); 
 };
 
-function createPlace(e) {
-    e.preventDefault();
-    renderItem(inputPlace.value, inputPhoto.value);
+function createPlace(el) {
+
+    const newElement = elementTemplate.cloneNode(true);
+    let elementPhoto = newElement.querySelector('.element__photo');
+    let elementTittle = newElement.querySelector('.element__tittle');
+    elementTittle.textContent = el.name;
+    elementPhoto.src = el.link;
+    elementPhoto.alt = el.name;
+
+
+    renderElement(newElement);
 //    const cardTemplate = document.querySelector('.element-template').content;/*работающее с хтмл положение*/
-//    inputPlace.value = elementTitle.textContent;/*присваивание имени*/
-//    inputPhoto.value = elementPhoto.textContent;/*присваивание активностей*/
-    closePopup(popupAddPlace);
+    inputPlace.value = elementTittle.textContent;/*присваивание имени*/
+    inputPhoto.value = elementPhoto.textContent;/*присваивание активностей*/
     console.log(1);
+};
+
+function addNewElementPlace(evt) {
+    evt.preventDefault();
+    const newElement = elementTemplate.cloneNode(true);
+
+    let newPhoto = newElement.querySelector('.element__photo');
+    let newTittle = newElement.querySelector('.element__tittle');
+    newPhoto.src = inputPhoto.value;
+    newTittle.textContent = inputPlace.value;
+
+    createPlace();
+    closePopup(popupAddPlace);
 };
 
 
@@ -115,4 +135,4 @@ popupCloseButtonPlace.addEventListener('click', closePopup);
 delteButton.addEventListener('click', deleteOnePlace);
 
 profileForm.addEventListener('submit', submitForm);/*было popupForm.addEventListener('submit', submitForm);*/
-placeForm.addEventListener('submit', createPlace);
+placeForm.addEventListener('submit', addNewElementPlace);
