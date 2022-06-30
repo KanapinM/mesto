@@ -1,3 +1,30 @@
+const initialCards = [
+    {
+      name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+      name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+      name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+      name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+      name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+      name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+  ]; 
+
 const element = document.querySelector('.element');
 const elements = document.querySelector('.elements');
 
@@ -20,8 +47,8 @@ const profileName = document.querySelector('.profile__name');
 const profileInterest = document.querySelector('.profile__interest');
 const inputPlace = document.querySelector('.popup__input_type_place');
 const inputPhoto = document.querySelector('.popup__input_type_photo');
-//const elementTitle = document.querySelector('.element__tittle');/
-//const elementPhoto = document.querySelector('.element__photo');
+const elementTitle = document.querySelector('.element__tittle');//test
+const elementPhoto = document.querySelector('.element__photo');//test
 const elementTemplate = document.querySelector('.element-template');
 
 
@@ -49,31 +76,19 @@ function submitForm(evt) {
     closePopup();
 };
 
-function addPlace() {
+function openPopupAddPlace() {
     openPopup(popupAddPlace);
 };
 
-function renderElement(card) {
-
-//    newElement.querySelector('.element__tittle').innerText = text;
-//    newPhoto.querySelector('.element__photo').innerText = href;
-
-    element.appendChild(card); 
-
-//    elements.insertAdjacentHTML('afterbegin', `
-//            <article class="element">
-//                 <button type="button" aria-label="delete" class="element__delete-button"></button>
-//                 <img class="element__photo" src=${href} alt="#">
-//                  <div class="element__place">
-//                      <h2 class="element__tittle">${text}</h2>
-//                      <button type="button" aria-label="like" class="element__like element__like-disabled"></button>
-//                  </div>
-//            </article>
-//                    `); 
+function cardInput(el) {
+    elements.prepend(el);
 };
 
-function createPlace(el) {
+function renderElement(el) {
+    elements.prepend(el);
+};
 
+function createPlace(el) {    
     const newElement = elementTemplate.cloneNode(true);
     let elementPhoto = newElement.querySelector('.element__photo');
     let elementTittle = newElement.querySelector('.element__tittle');
@@ -83,24 +98,22 @@ function createPlace(el) {
 
 
     renderElement(newElement);
-//    const cardTemplate = document.querySelector('.element-template').content;/*работающее с хтмл положение*/
-    inputPlace.value = elementTittle.textContent;/*присваивание имени*/
-    inputPhoto.value = elementPhoto.textContent;/*присваивание активностей*/
+//    inputPlace.value = elementTittle.textContent;//test
+//    inputPhoto.value = elementPhoto.textContent;//test
     console.log(1);
+    return newElement;
 };
 
 function addNewElementPlace(evt) {
     evt.preventDefault();
-    const newElement = elementTemplate.cloneNode(true);
 
-    let newPhoto = newElement.querySelector('.element__photo');
-    let newTittle = newElement.querySelector('.element__tittle');
-    newPhoto.src = inputPhoto.value;
-    newTittle.textContent = inputPlace.value;
-
-    createPlace();
+//    elementTittle = inputPlace.value;//test
+//    elementPhoto = inputPhoto.value;//test
+    cardInput({name: inputPlace.value, link: inputPhoto.value});
+    createPlace(cardInput);
     closePopup(popupAddPlace);
 };
+
 
 
 //function activeLike() {
@@ -126,7 +139,7 @@ edit.addEventListener('click', () => {
 });
 
 add.addEventListener('click', () => {
-    addPlace();
+    openPopupAddPlace();
 });
 
 //like.addEventListener('click', activeLike);
