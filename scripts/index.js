@@ -25,7 +25,7 @@ const initialCards = [
     }
   ]; 
 
-const element = document.querySelector('.element');
+const element = document.querySelectorAll('.element');
 const elements = document.querySelector('.elements');
 
 const edit = document.querySelector('.profile__edit-button');
@@ -80,8 +80,9 @@ function openPopupAddPlace() {
     openPopup(popupAddPlace);
 };
 
-function cardInput(el) {
-    elements.prepend(el);
+function placeInput(newPlace) {
+    createPlace(placeInput);
+    renderElement(newPlace);
 };
 
 function renderElement(el) {
@@ -90,12 +91,13 @@ function renderElement(el) {
 
 function createPlace(el) {    
     const newElement = elementTemplate.cloneNode(true);
+    console.log(newElement);
+    debugger;
     let elementPhoto = newElement.querySelector('.element__photo');
     let elementTittle = newElement.querySelector('.element__tittle');
     elementTittle.textContent = el.name;
     elementPhoto.src = el.link;
     elementPhoto.alt = el.name;
-
 
     renderElement(newElement);
 //    inputPlace.value = elementTittle.textContent;//test
@@ -109,9 +111,10 @@ function addNewElementPlace(evt) {
 
 //    elementTittle = inputPlace.value;//test
 //    elementPhoto = inputPhoto.value;//test
-    cardInput({name: inputPlace.value, link: inputPhoto.value});
-    createPlace(cardInput);
+    placeInput({name: inputPlace.value, link: inputPhoto.value});
+    createPlace();
     closePopup(popupAddPlace);
+    console.log(3);
 };
 
 
@@ -141,6 +144,8 @@ edit.addEventListener('click', () => {
 add.addEventListener('click', () => {
     openPopupAddPlace();
 });
+
+//initialCards.forEach(renderElement);
 
 //like.addEventListener('click', activeLike);
 popupCloseButtonProfile.addEventListener('click', closePopup);
