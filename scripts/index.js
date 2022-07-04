@@ -47,9 +47,9 @@ const profileName = document.querySelector('.profile__name');
 const profileInterest = document.querySelector('.profile__interest');
 const inputPlace = document.querySelector('.popup__input_type_place');
 const inputPhoto = document.querySelector('.popup__input_type_photo');
-const elementTitle = document.querySelector('.element__tittle');//test
-const elementPhoto = document.querySelector('.element__photo');//test
-const elementTemplate = document.querySelector('.element-template');
+const elementTitle = document.querySelector('.element__tittle');
+const elementPhoto = document.querySelector('.element__photo');
+const elementTemplate = document.querySelector('.element-template').content;
 
 
 function openPopup(popup) {
@@ -80,38 +80,51 @@ function openPopupAddPlace() {
     openPopup(popupAddPlace);
 };
 
-function placeInput(newPlace) {
-    createPlace(placeInput);
-    renderElement(newPlace);
-};
+//function placeInput(newPlace) {//test
+//    createPlace(newPlace);//test
+//    renderElement(newPlace);//test
+//};//test
 
-function renderElement(el) {
-    elements.prepend(el);
+function renderElement(card) {
+
+
+    elements.prepend(card);
+    console.log(inputPhoto.value);
+
 };
 
 function createPlace(el) {    
-    const newElement = elementTemplate.cloneNode(true);
-    console.log(newElement);
-    debugger;
-    let elementPhoto = newElement.querySelector('.element__photo');
-    let elementTittle = newElement.querySelector('.element__tittle');
-    elementTittle.textContent = el.name;
-    elementPhoto.src = el.link;
-    elementPhoto.alt = el.name;
+    const newElement = elementTemplate.querySelector('.element').cloneNode(true);
 
-    renderElement(newElement);
-//    inputPlace.value = elementTittle.textContent;//test
-//    inputPhoto.value = elementPhoto.textContent;//test
-    console.log(1);
-    return newElement;
+    console.log(newElement);
+    console.log(inputPlace.value);
+//    newElement.querySelector('.element__photo').innerText = text;
+
+    
+
+
+//    newElement.querySelector('.element__photo').textContent = el.link;
+//    newElement.querySelector('.element__tittle').textContent = el.name;
+//    inputPlace.value = el.name;
+//    inputPhoto.value = el.link;
+
+
+//    let elementPhoto = newElement.querySelector('.element__photo');//test
+//    let elementTittle = newElement.querySelector('.element__tittle');//test
+//    elementTittle.textContent = el.name;//test
+//    elementPhoto.src = el.link;//test
+//    elementPhoto.alt = el.name;//test
+
+    renderElement(newElement);//test
+//    console.log(1);//test
+//    return newElement;//test
 };
 
 function addNewElementPlace(evt) {
     evt.preventDefault();
+//    inputPlace.value = placeForm.querySelector('.popup__input_type_photo').innerText;///
 
-//    elementTittle = inputPlace.value;//test
-//    elementPhoto = inputPhoto.value;//test
-    placeInput({name: inputPlace.value, link: inputPhoto.value});
+//    placeInput({name: inputPlace.value, link: inputPhoto.value});
     createPlace();
     closePopup(popupAddPlace);
     console.log(3);
@@ -129,12 +142,12 @@ function addNewElementPlace(evt) {
 //    
 //};
 
-function deleteOnePlace(e) { if 
-    (e.target.matches('.element__delete-button'))
-    e.target.closest('element')
-    element.remove();
-    console.log(1);
-};
+//function deleteOnePlace(e) { if 
+//    (e.target.matches('.element__delete-button'))
+//    e.target.closest('element')
+//    element.remove();
+//    console.log(1);
+//};
 
 
 edit.addEventListener('click', () => {
@@ -150,7 +163,7 @@ add.addEventListener('click', () => {
 //like.addEventListener('click', activeLike);
 popupCloseButtonProfile.addEventListener('click', closePopup);
 popupCloseButtonPlace.addEventListener('click', closePopup);
-delteButton.addEventListener('click', deleteOnePlace);
+//delteButton.addEventListener('click', deleteOnePlace);
 
 profileForm.addEventListener('submit', submitForm);/*было popupForm.addEventListener('submit', submitForm);*/
 placeForm.addEventListener('submit', addNewElementPlace);
