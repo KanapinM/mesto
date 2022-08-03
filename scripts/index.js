@@ -51,16 +51,15 @@ const inputPlace = document.querySelector('.popup__input_type_place');
 const inputPhoto = document.querySelector('.popup__input_type_photo');
 const cardTitle = document.querySelector('.element__tittle');
 const cardPhoto = document.querySelector('.element__photo');
-//const template = document.querySelector('.element-template');
 const cardTemplate = document.getElementsByTagName('template')[0].content.children[0];
 
 
-/* . Рендер первоначальных карточек */
+/*  Рендер первоначальных карточек */
 initialCards.forEach((card) => {
   render(card);
 })
 
-/* 1. Открытие/закрытие попапов */
+/*  Открытие/закрытие попапов */
 function openPopup(popup) {
   popup.classList.add('popup_open');
 };
@@ -82,7 +81,7 @@ function closePopup() {
 popupCloseButtonProfile.addEventListener('click', closePopup);
 popupCloseButtonPlace.addEventListener('click', closePopup);
 
-/* 2. Редактирование профиля */
+/*  Редактирование профиля */
 
 saveButton.addEventListener('click', (evt) => {
   evt.preventDefault();
@@ -91,13 +90,13 @@ saveButton.addEventListener('click', (evt) => {
   closePopup();
 });
 
-/* 3. Рендер  карточек */
+/*  Рендер  карточек */
 function buildInputObject() {
   let object = {
     name: inputPlace.value,
     link: inputPhoto.value
   }
-  console.log(object)
+
   return object;
 }
 
@@ -116,7 +115,7 @@ function render(object) {
     deleteButton.parentElement.remove();
   })
 
-  /* . Лайк карточки */
+  /* Лайк карточки */
 
   const likeButton = document.querySelector('.element__like');
   likeButton.addEventListener('click', () => {
@@ -128,6 +127,7 @@ function render(object) {
     }
   });
 
+  /*  Открытие фотографии карточки во всплывающем окне */
 
   img.addEventListener('click', () => {
     document.querySelector('.popup__place-img').src = img.src;
@@ -140,7 +140,7 @@ function render(object) {
   popupCloseButtonImg.addEventListener('click', closePopup);
 }
 
-/* 4. Создание новой карточки */
+/* Создание новой карточки */
 
 createButton.addEventListener('click', (e) => {
   e.preventDefault();
@@ -148,17 +148,4 @@ createButton.addEventListener('click', (e) => {
   closePopup();
   inputPhoto.value = '';
   inputPlace.value = '';
-  console.log(123);
 });
-
-
-
-
-
-
-/* 7. Открытие фотографии карточки во всплывающем окне */
-
-
-
-console.log('asf');
-//console.log(initialCards[1].name);
