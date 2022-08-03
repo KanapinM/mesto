@@ -22,92 +22,35 @@
 @import url(../blocks/element/__photo/element__photo.css);
 @import url(../blocks/element/__place/element__place.css);
 @import url(../blocks/element/__tittle/element__tittle.css);
-@import url(../blocks/element/__like-disabled/element__like-disabled.css);
+@import url(../blocks/element/__like/__like.css);
+@import url(../blocks/element/__like/_disabled/element__like_disabled.css);
+@import url(../blocks/element/__like/_active/element__like_active.css);
+@import url(../blocks/element/__delete-button/element__delete-button.css);
+
+
+
+@import url(../blocks/element/);
+@import url(../blocks/element/__delete-button/element__delete-button.css);
+
 
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_open/popup_open.css);
 @import url(../blocks/popup/__close-button/popup__close-button.css);
 @import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__container/_img/popup__container_img.css);
+
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__save-button/popup__save-button.css);
 
+@import url(../blocks/popup/__place-img/popup__place-img.css);
+@import url(../blocks/popup/__place-name/popup__place-name.css);
+
+@import url(../blocks/popup/__close-button/_img/popup__close-button_img.css);
+@import url(../blocks/popup/__create-button/popup__create-button.css);
+
+
+
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
-
-.element__delete-button {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    width: 18px;
-    min-height: 19px;
-    background-image: url(../images/delete-button.svg);
-    background-size: cover;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    transition: ease-in-out 0.3s;
-}
-
-.element__delete-button:hover {
-    opacity: 0.5;
-}
-
-.element__like {
-    margin-right: 20px;
-    min-width: 22px;
-    min-height: 19px;
-    background-size: cover;
-    background-color: transparent;
-    border: none;
-    padding-top: 5px;
-    align-self: center;
-    padding: 0;
-    cursor: pointer;
-    transition: ease-in-out 0.3s;
-}
-
-.element__like:hover {
-    opacity: 0.5;
-}
-
-.element__like-active {
-    background-image: url(../images/like-active.svg);
-}
-
-.popup__create-button {
-    margin: 20px 36px 37px;
-    padding: 13px 0 14px;
-    max-width: 358px;
-    text-align: center;
-    background-color: black;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
-    border-radius: 2px;
-    transition: ease-in-out 0.3s;
-}
-
-.popup__create-button:hover {
-    opacity: 0.8;
-}
-
-@media screen and (max-width: 767px) {
-    .popup__create-button {
-        max-width: 238px;
-        min-height: 46px;
-        margin: 15px 22px 25px;
-        font-size: 14px;
-        line-height: 17px;
-    }
-}
-
-
-
-
-
-

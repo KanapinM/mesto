@@ -30,98 +30,56 @@
                 <button type="button" aria-label="add" class="profile__add-button"></button>
             </section>
             <div class="elements">
-                <article class="element">
-                    <button type="button" aria-label="delete" class="element__delete-button"></button>
-                    <img class="element__photo" src="./images/karachaevsk.jpg"
-                        alt="вид на горный Карачаевск разделенный рекой">
-                    <div class="element__place">
-                        <h2 class="element__tittle">Карачаевск</h2>
-                        <button type="button" aria-label="like" class="element__like element__like-disabled"
-                            element__like-disabled"></button>
-                    </div>
-                </article>
-                <article class="element">
-                    <button type="button" aria-label="delete" class="element__delete-button"></button>
-                    <img class="element__photo" src="./images/spb.jpg" alt="Исаакиевский собор">
-                    <div class="element__place">
-                        <h2 class="element__tittle">Санкт-Петербург</h2>
-                        <button type="button" aria-label="like" class="element__like element__like-disabled"></button>
-                    </div>
-                </article>
-                <article class="element">
-                    <button type="button" aria-label="delete" class="element__delete-button"></button>
-                    <img class="element__photo" src="./images/dagestan.jpg"
-                        alt="зеленые горы Дагестана с птичьего полета">
-                    <div class="element__place">
-                        <h2 class="element__tittle">Дагестан</h2>
-                        <button type="button" aria-label="like" class="element__like element__like-disabled"></button>
-                    </div>
-                </article>
-                <article class="element">
-                    <button type="button" aria-label="delete" class="element__delete-button"></button>
-                    <img class="element__photo" src="./images/karelia.jpg"
-                        alt="мраморный карьер наполненный лазурной водой">
-                    <div class="element__place">
-                        <h2 class="element__tittle">Карелия</h2>
-                        <button type="button" aria-label="like" class="element__like element__like-disabled"></button>
-                    </div>
-                </article>
-                <article class="element">
-                    <button type="button" aria-label="delete" class="element__delete-button"></button>
-                    <img class="element__photo" src="./images/kazan.jpg"
-                        alt="монументальное сооружение с куполами и колоннами фасад которого украшено бронзовым деревом">
-                    <div class="element__place">
-                        <h2 class="element__tittle">Казань</h2>
-                        <button type="button" aria-label="like" class="element__like element__like-disabled"></button>
-                    </div>
-                </article>
-                <article class="element">
-                    <button type="button" aria-label="delete" class="element__delete-button"></button>
-                    <img class="element__photo" src="./images/moscow-city.jpg" alt="вид на москоу-сити с воды">
-                    <div class="element__place">
-                        <h2 class="element__tittle">Москва</h2>
-                        <button type="button" aria-label="like" class="element__like element__like-disabled"></button>
-                    </div>
-                </article>
+
             </div>
         </main>
         <footer class="footer">
             <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
         </footer>
 
-        <div id="popup" class="popup popup_type_edit-profile">
+        <div class="popup popup_type_edit-profile">
             <button type="button" class="popup__close-button popup__close-button_profile"></button>
             <div class="popup__container">
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form name="popup__form" class="popup__form popup__form_type_profile">
-                    <input type="text" class="popup__input popup__input_type_name" value="Ваше Имя">
-                    <input type="text" class="popup__input popup__input_type_interest" value="Интересы">
+                    <input type="text" class="popup__input popup__input_type_name" placeholder="Ваше Имя">
+                    <input type="text" class="popup__input popup__input_type_interest" placeholder="Интересы">
                     <button type="submit" class="popup__save-button">Сохранить</button>
                 </form>
             </div>
         </div>
-        <div id="popup" class="popup popup_type_add-place">
+        <div class="popup popup_type_add-place">
             <button type="button" class="popup__close-button popup__close-button_place"></button>
             <div class="popup__container">
                 <h2 class="popup__title">Новое место</h2>
                 <form name="popup__form" class="popup__form popup__form_type_place">
                     <input type="text" name="name" class="popup__input popup__input_type_place" placeholder="Название">
-                    <input type="url" name="src" class="popup__input popup__input_type_photo" placeholder="Ссылка на картинку">
+                    <input type="url" name="src" class="popup__input popup__input_type_photo"
+                        placeholder="Ссылка на картинку">
                     <button type="submit" class="popup__create-button">Создать</button>
                 </form>
             </div>
         </div>
+        <div class="popup popup_type_img">
+            <div class="popup__container_img">
+                <button type="button" class="popup__close-button popup__close-button_img"></button>
+                <img class="popup__place-img"
+                    src="https://avatars.mds.yandex.net/get-images-cbir/858759/sQpnJ9rcaOpxw6WJ1OauLw4020/ocr" alt="">
+                <p class="popup__place-name">Москва
+                <p>
+            </div>
+        </div>
+    </div>
     </div>
     <template class="element-template">
-        <article class="element">
-            <button type="button" aria-label="delete" class="element__delete-button"></button>
+        <article id="template" class="element">
+            <button type="button" class="element__delete-button"></button>
             <img class="element__photo" src="" alt="">
             <div class="element__place">
                 <h2 class="element__tittle"></h2>
-                <button type="button" aria-label="like" class="element__like element__like-disabled"></button>
+                <button type="button" aria-label="like" class="element__like element__like_disabled"></button>
             </div>
         </article>
-
     </template>
     <script src="./scripts/index.js"></script>
 </body>
