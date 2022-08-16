@@ -13,8 +13,7 @@ const hideInputError = (formElement, inputElement, config) => {
 };
 
 const checkInputValidity = (formElement, inputElement, config) => {
-    console.log(formElement.querySelector('.popup__input').value.length);
-    if (!inputElement.validity.valid || formElement.querySelector('.popup__input').value.length === 0) {
+    if (!inputElement.validity.valid) {
         showInputError(formElement, inputElement, inputElement.validationMessage, config);
     } else {
         hideInputError(formElement, inputElement, config);
