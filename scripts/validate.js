@@ -13,7 +13,8 @@ const hideInputError = (formElement, inputElement, config) => {
 };
 
 const checkInputValidity = (formElement, inputElement, config) => {
-    if (!inputElement.validity.valid) {
+    console.log(formElement.querySelector('.popup__input').value.length);
+    if (!inputElement.validity.valid || formElement.querySelector('.popup__input').value.length === 0) {
         showInputError(formElement, inputElement, inputElement.validationMessage, config);
     } else {
         hideInputError(formElement, inputElement, config);
@@ -23,10 +24,10 @@ const checkInputValidity = (formElement, inputElement, config) => {
 const setEventListeners = (formElement, config) => {
     const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
     const buttonElement = formElement.querySelector(config.submitButtonSelector);
-    toggleButtonState(inputList, buttonElement, config);
+    toggleButtonState(inputList, buttonElement, config, formElement);
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', function () {
-            toggleButtonState(inputList, buttonElement, config);
+            toggleButtonState(inputList, buttonElement, config, formElement);
             checkInputValidity(formElement, inputElement, config);
         });
     });
@@ -35,13 +36,7 @@ const setEventListeners = (formElement, config) => {
 const enableValidation = (config) => {
     const formList = Array.from(document.querySelectorAll(config.formSelector));
     formList.forEach((formElement) => {
-        formElement.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-        });
-        const fieldsetList = Array.from(formElement.querySelectorAll('.popup__set'));
-        fieldsetList.forEach((fieldset) => {
-            setEventListeners(fieldset, config);
-        });
+        setEventListeners(formElement, config);
     });
 };
 
@@ -51,11 +46,13 @@ const hasInvalidInput = (inputList) => {
     });
 };
 
-const toggleButtonState = (inputList, buttonElement, config) => {
+const toggleButtonState = (inputList, buttonElement, config, formElement) => {
     if (hasInvalidInput(inputList)) {
+        formElement.querySelector(config.submitButtonSelector).setAttribute('disabled', 'disabled');
         buttonElement.classList.add(config.inactiveButtonClass);
     } else {
         buttonElement.classList.remove(config.inactiveButtonClass);
+        formElement.querySelector(config.submitButtonSelector).removeAttribute('disabled');
     }
 };
 
