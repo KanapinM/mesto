@@ -35,11 +35,11 @@ initialCards.forEach((card) => {
 function openPopup(popup) {
   popup.classList.add('popup_open');
   document.addEventListener('keydown', closeByEsc);
-  document.addEventListener('click', closeByOverlay);
+  popup.addEventListener('click', closeByOverlay);
 };
 
 function closePopup(popup) {
-  document.removeEventListener('click', closeByOverlay);
+  popup.removeEventListener('click', closeByOverlay);
   document.removeEventListener('keydown', closeByEsc);
   popup.classList.remove('popup_open');
 };
@@ -52,8 +52,7 @@ const closeByEsc = function (e) {
 };
 const closeByOverlay = function (evt) {
   if (evt.target === (evt.target).closest('.popup_open')) {
-    const openedPopup = document.querySelector('.popup_open');
-    closePopup(openedPopup);
+    closePopup(evt.target);
   }
 };
 
