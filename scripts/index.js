@@ -1,3 +1,4 @@
+
 const cardsContainer = document.querySelector('.elements');
 
 const buttonEditProfile = document.querySelector('.profile__edit-button');
@@ -22,9 +23,12 @@ const profileName = document.querySelector('.profile__name');
 const profileInterest = document.querySelector('.profile__interest');
 const inputPlace = document.querySelector('.popup__input_type_place');
 const inputPhoto = document.querySelector('.popup__input_type_photo');
-
+// 
 const cardTemplate = document.querySelector('.element-template').content.querySelector('.element');
 
+import { Card } from './card.js';
+const cardItem = new Card();
+console.dir(cardItem);
 
 /*  Рендер первоначальных карточек */
 initialCards.forEach((card) => {
@@ -67,53 +71,56 @@ function buildInputObject() {
   return objectCard;
 }
 
-function createCard(card) {
-  const newCard = cardTemplate.cloneNode(true);
-  newCard.querySelector('.element__tittle').textContent = card.name;
-  const image = newCard.querySelector('.element__photo')
-  image.alt = card.name;
-  image.src = card.link;
+// function createCard(card) {
+//   const newCard = cardTemplate.cloneNode(true);
+//   newCard.querySelector('.element__tittle').textContent = card.name;
+//   const image = newCard.querySelector('.element__photo')
+//   image.alt = card.name;
+//   image.src = card.link;
 
-  /* Удаление карточки */
+//   /* Удаление карточки */
 
-  const buttonDelete = newCard.querySelector('.element__delete-button')
-  buttonDelete.addEventListener('click', () => {
-    newCard.remove();
-  })
+//   const buttonDelete = newCard.querySelector('.element__delete-button')
+//   buttonDelete.addEventListener('click', () => {
+//     newCard.remove();
+//   })
 
-  /* Лайк карточки */
+//   /* Лайк карточки */
 
-  const buttonLike = newCard.querySelector('.element__like');
-  buttonLike.addEventListener('click', () => {
-    buttonLike.classList.toggle('element__like_active');
-  });
+//   const buttonLike = newCard.querySelector('.element__like');
+//   buttonLike.addEventListener('click', () => {
+//     buttonLike.classList.toggle('element__like_active');
+//   });
 
-  /*  Открытие/закрытие карточки во всплывающем окне */
+//   /*  Открытие/закрытие карточки во всплывающем окне */
 
-  image.addEventListener('click', () => {
-    popupImagePhoto.src = card.link;
-    popupImagePhoto.alt = card.name;
-    popupImageName.textContent = card.name;
-    openPopup(popupImage);
-  });
-  return newCard;
-}
+//   image.addEventListener('click', () => {
+//     popupImagePhoto.src = card.link;
+//     popupImagePhoto.alt = card.name;
+//     popupImageName.textContent = card.name;
+//     openPopup(popupImage);
+//   });
+//   return newCard;
+// }
 
 function renderCard(card) {
-  cardsContainer.prepend(createCard(card));
+  // cardsContainer.prepend(createCard(card)); !!! временно посмотреть сво-во!!!
 }
 /* открытие профиля */
 buttonEditProfile.addEventListener('click', () => {
-  buttonSubmitProfileForm.classList.add('popup__submit-button_inactive');
-  buttonSubmitProfileForm.setAttribute('disabled', 'disabled');
   inputName.value = profileName.textContent;
   inputInterest.value = profileInterest.textContent;
+  profileForm.querySelectorAll('.popup__input').forEach(text => { text.classList.remove('popup__input_type_error') });
+  profileForm.querySelectorAll('.popup__input-error').forEach(line => { line.classList.remove('popup__input-error_active') });
+
   openPopup(popupEditProfile);
 });
 
 buttonAddCard.addEventListener('click', () => {
   buttonSubmitAddCardForm.classList.add('popup__submit-button_inactive');
   buttonSubmitAddCardForm.setAttribute('disabled', 'disabled');
+  placeForm.querySelectorAll('.popup__input').forEach(text => { text.classList.remove('popup__input_type_error') });
+  placeForm.querySelectorAll('.popup__input-error').forEach(line => { line.classList.remove('popup__input-error_active') });
   placeForm.reset();
   openPopup(popupAddPlace);
 });
@@ -143,5 +150,4 @@ placeForm.addEventListener('submit', (e) => {
   e.preventDefault();
   renderCard(buildInputObject());
   closePopup(popupAddPlace);
-  //  document.querySelector('.popup__form_type_place').reset();
 });

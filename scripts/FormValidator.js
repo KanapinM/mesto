@@ -1,3 +1,5 @@
+
+
 const showInputError = (formElement, inputElement, errorMessage, config) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(config.inputErrorClass);
@@ -11,6 +13,7 @@ const hideInputError = (formElement, inputElement, config) => {
     errorElement.classList.remove(config.errorClass);
     errorElement.textContent = '';
 };
+
 
 const checkInputValidity = (formElement, inputElement, config) => {
     if (!inputElement.validity.valid) {
@@ -55,11 +58,13 @@ const toggleButtonState = (inputList, buttonElement, config, formElement) => {
     }
 };
 
-enableValidation({
+const validationConfig = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__submit-button',
     inactiveButtonClass: 'popup__submit-button_inactive',
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__input-error_active'
-}); 
+};
+
+enableValidation(validationConfig);
