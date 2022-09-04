@@ -1,3 +1,5 @@
+import { Card } from './card.js';
+import { FormValidator } from './FormValidator.js';
 
 const cardsContainer = document.querySelector('.elements');
 
@@ -23,17 +25,28 @@ const profileName = document.querySelector('.profile__name');
 const profileInterest = document.querySelector('.profile__interest');
 const inputPlace = document.querySelector('.popup__input_type_place');
 const inputPhoto = document.querySelector('.popup__input_type_photo');
-// 
-const cardTemplate = document.querySelector('.element-template').content.querySelector('.element');
 
-import { Card } from './card.js';
-const cardItem = new Card();
-console.dir(cardItem);
+//const cardTemplate = document.querySelector('.element-template').content.querySelector('.element');
+
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+};
+
+const selectors = {
+  template: '.element-template'
+
+}
 
 /*  Рендер первоначальных карточек */
 initialCards.forEach((card) => {
   renderCard(card);
 })
+
 
 /*  Открытие/закрытие попапов */
 function openPopup(popup) {
@@ -71,41 +84,45 @@ function buildInputObject() {
   return objectCard;
 }
 
-// function createCard(card) {
-//   const newCard = cardTemplate.cloneNode(true);
-//   newCard.querySelector('.element__tittle').textContent = card.name;
-//   const image = newCard.querySelector('.element__photo')
-//   image.alt = card.name;
-//   image.src = card.link;
+function createCard(name, link) {
+  const newCard = new Card(name, link, selectors, openPopup);
+  const cardElement = newCard.generateCard();
+  // const newCard = cardTemplate.cloneNode(true);
 
-//   /* Удаление карточки */
+  // newCard.querySelector('.element__tittle').textContent = card.name;
+  // const image = newCard.querySelector('.element__photo');
+  // image.alt = card.name;
+  // image.src = card.link;
 
-//   const buttonDelete = newCard.querySelector('.element__delete-button')
-//   buttonDelete.addEventListener('click', () => {
-//     newCard.remove();
-//   })
+  // /* Удаление карточки */
 
-//   /* Лайк карточки */
+  // const buttonDelete = newCard.querySelector('.element__delete-button')
+  // buttonDelete.addEventListener('click', () => {
+  //   newCard.remove();
+  // })
 
-//   const buttonLike = newCard.querySelector('.element__like');
-//   buttonLike.addEventListener('click', () => {
-//     buttonLike.classList.toggle('element__like_active');
-//   });
+  // /* Лайк карточки */
 
-//   /*  Открытие/закрытие карточки во всплывающем окне */
+  // const buttonLike = newCard.querySelector('.element__like');
+  // buttonLike.addEventListener('click', () => {
+  //   buttonLike.classList.toggle('element__like_active');
+  // });
 
-//   image.addEventListener('click', () => {
-//     popupImagePhoto.src = card.link;
-//     popupImagePhoto.alt = card.name;
-//     popupImageName.textContent = card.name;
-//     openPopup(popupImage);
-//   });
-//   return newCard;
-// }
+  // /*  Открытие/закрытие карточки во всплывающем окне */
+
+  // image.addEventListener('click', () => {
+  //   popupImagePhoto.src = card.link;
+  //   popupImagePhoto.alt = card.name;
+  //   popupImageName.textContent = card.name;
+  //   openPopup(popupImage);
+  // });
+  return cardElement;
+}
 
 function renderCard(card) {
-  // cardsContainer.prepend(createCard(card)); !!! временно посмотреть сво-во!!!
+  cardsContainer.prepend(createCard(card.name, card.link));
 }
+
 /* открытие профиля */
 buttonEditProfile.addEventListener('click', () => {
   inputName.value = profileName.textContent;
@@ -151,3 +168,8 @@ placeForm.addEventListener('submit', (e) => {
   renderCard(buildInputObject());
   closePopup(popupAddPlace);
 });
+
+const placeFormValidator = new FormValidator(validationConfig, placeForm);
+placeFormValidator.enableValidation();
+const profileFormValidator = new FormValidator(validationConfig, profileForm);
+profileFormValidator.enableValidation();
