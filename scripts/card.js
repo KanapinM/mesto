@@ -1,5 +1,3 @@
-
-
 export class Card {
 
     constructor(name, link, selectors, openPopup) {
@@ -8,41 +6,46 @@ export class Card {
         this._selectors = selectors;
         this._template = document.querySelector(selectors.template).content;
         this.openPopup = openPopup;
+        this._popupImage = document.querySelector('.popup_type_image')
+        this._popupPlaceName = this._popupImage.querySelector('.popup__place-name');
+        this._popupPlaceImage = this._popupImage.querySelector('.popup__place-image');
+        this._element = this._getTemplate();
+        this._elementPhoto = this._element.querySelector('.element__photo');
+        this._elementTitle = this._element.querySelector('.element__tittle');
+        this._buttonDelete = this._element.querySelector('.element__delete-button');
+        this._buttonLike = this._element.querySelector('.element__like');
     }
+
 
     _getTemplate() {
         const cardElement = this._template.querySelector('.element').cloneNode(true);
         return cardElement;
     }
 
-
     _setEventListeners() {
         /* Удаление карточки */
-        this._element.querySelector('.element__delete-button').addEventListener('click', () => {
+        this._buttonDelete.addEventListener('click', () => {
             this._element.remove();
         })
 
-
         /* Лайк карточки */
-        this._element.querySelector('.element__like').addEventListener('click', () => {
-            this._element.querySelector('.element__like').classList.toggle('element__like_active');
+        this._buttonLike.addEventListener('click', () => {
+            this._buttonLike.classList.toggle('element__like_active');
         });
 
-
         /*  Открытие/закрытие карточки во всплывающем окне */
-        this._element.querySelector('.element__photo').addEventListener('click', () => {
-            document.querySelector('.popup__place-name').textContent = this._name;
-            document.querySelector('.popup__place-name').alt = this._name;
-            document.querySelector('.popup__place-image').src = this._link;
-            this.openPopup(document.querySelector('.popup_type_image'));
+        this._elementPhoto.addEventListener('click', () => {
+            this.openPopup(this._popupImage);
+            this._popupPlaceName.textContent = this._name;
+            this._popupPlaceImage.src = this._link;
+            this._popupPlaceImage.alt = this._name;
         });
     }
 
     generateCard() {
-        this._element = this._getTemplate();
-        this._element.querySelector('.element__photo').src = this._link;
-        this._element.querySelector('.element__tittle').alt = this._name;
-        this._element.querySelector('.element__tittle').textContent = this._name;
+        this._elementPhoto.src = this._link;
+        this._elementPhoto.alt = this._name;
+        this._elementTitle.textContent = this._name;
         this._setEventListeners();
         return this._element;
     }
