@@ -6,19 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Место</title>
-    <link rel="stylesheet" href="pages/index.css">
+
 </head>
 
 <body>
     <div class="page">
         <header class="header">
-            <img class="header__logo" src="./images/mesto.svg" alt="текстовый логтип Место Раша">
+            <img class="header__logo" src="<%=require('./images/mesto.svg')%>" alt="текстовый логтип Место Раша">
         </header>
 
         <main class="content">
             <section class="profile">
                 <div class="profile__column">
-                    <img class="profile__avatar" src="./images/custo.jpg" alt="аватар пользователя">
+                    <img class="profile__avatar" src="<%=require('./images/custo.jpg')%>" alt="аватар пользователя">
                     <div class="profile__info">
                         <div class="profile__edit">
                             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -43,11 +43,11 @@
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form name="popup__form" class="popup__form popup__form_type_profile" novalidate>
                     <input type="text" class="popup__input popup__input_type_name" id="name-input"
-                        placeholder="Ваше Имя" required minlength="2" maxlength="40">
+                        placeholder="Ваше Имя" required minlength="2" maxlength="40" name="name">
                     <span class="popup__input-error name-input-error"></span>
 
                     <input type="text" class="popup__input popup__input_type_interest" id="interest-input"
-                        placeholder="Интересы" required minlength="2" maxlength="200">
+                        placeholder="Интересы" required minlength="2" maxlength="200" name="interest">
                     <span class="popup__input-error interest-input-error"></span>
 
                     <button type="submit"
@@ -65,7 +65,7 @@
                         placeholder="Название" required minlength="2" maxlength="30">
                     <span class="popup__input-error place-input-error"></span>
 
-                    <input type="url" name="src" class="popup__input popup__input_type_photo" id="href-input" required
+                    <input type="url" name="link" class="popup__input popup__input_type_photo" id="href-input" required
                         placeholder="Ссылка на картинку">
                     <span class="popup__input-error href-input-error"></span>
 
@@ -76,8 +76,8 @@
         <div class="popup popup_type_image">
             <div class="popup__container-image">
                 <button type="button" class="popup__close-button popup__close-button_image"></button>
-                <img class="popup__place-image" src="#" alt="">
-                <p class="popup__place-name">Москва
+                <img class="popup__place-image" src="#" alt="" name="link">
+                <p class="popup__place-name" name="name">Москва
                 </p>
             </div>
         </div>
@@ -92,8 +92,6 @@
             </div>
         </article>
     </template>
-    <script src="./scripts/constants.js"></script>
-    <script src="./scripts/index.js" type="module"></script>
 </body>
 
 </html>

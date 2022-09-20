@@ -1,11 +1,11 @@
 export class Card {
-
-    constructor(name, link, selectors, openPopup) {
-        this._name = name;
-        this._link = link;;
+    constructor({ data, handleCardClick }, selectors) {
+        this._data = data;
+        this._name = data.name;
+        this._link = data.link;
         this._selectors = selectors;
         this._template = document.querySelector(selectors.template).content;
-        this.openPopup = openPopup;
+        this.handleCardClick = handleCardClick;
         this._popupImage = document.querySelector('.popup_type_image')
         this._popupPlaceName = this._popupImage.querySelector('.popup__place-name');
         this._popupPlaceImage = this._popupImage.querySelector('.popup__place-image');
@@ -33,21 +33,15 @@ export class Card {
             this._buttonLike.classList.toggle('element__like_active');
         });
 
-        /*  Открытие/закрытие карточки во всплывающем окне */
-        this._elementPhoto.addEventListener('click', () => {
-            this.openPopup(this._popupImage);
-            this._popupPlaceName.textContent = this._name;
-            this._popupPlaceImage.src = this._link;
-            this._popupPlaceImage.alt = this._name;
-        });
     }
 
     generateCard() {
-        this._elementPhoto.src = this._link;
-        this._elementPhoto.alt = this._name;
-        this._elementTitle.textContent = this._name;
+        this._elementPhoto.src = this._data.link;
+        this._elementPhoto.alt = this._data.name;
+        this._elementTitle.textContent = this._data.name;
         this._setEventListeners();
+
+        this._elementPhoto.addEventListener('click', () => this.handleCardClick(this._data));
         return this._element;
     }
-
 }

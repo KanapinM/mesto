@@ -1,5 +1,4 @@
 export class FormValidator {
-
     constructor(validationConfig, formSelector) {
         this._validationConfig = validationConfig;
         this._formElement = formSelector;
