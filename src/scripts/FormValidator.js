@@ -1,7 +1,9 @@
 export class FormValidator {
-    constructor(validationConfig, formSelector) {
+    constructor(validationConfig, formElement) {
         this._validationConfig = validationConfig;
-        this._formElement = formSelector;
+        this._formElement = formElement;
+        this._inputList = this._formElement.querySelectorAll(this._validationConfig.inputSelector);
+
     }
 
     _showInputError(errorMessage) {
@@ -19,7 +21,7 @@ export class FormValidator {
     };
 
     removeInputError() {
-        this._formElement.querySelectorAll(this._validationConfig.inputSelector).forEach(text => { text.classList.remove(this._validationConfig.inputErrorClass) });
+        this._inputList.forEach(text => { text.classList.remove(this._validationConfig.inputErrorClass) });
         this._formElement.querySelectorAll(this._validationConfig.error).forEach(line => { line.classList.remove(this._validationConfig.errorClass) });
     };
 
@@ -32,7 +34,6 @@ export class FormValidator {
     };
 
     _setEventListeners() {
-        this._inputList = this._formElement.querySelectorAll(this._validationConfig.inputSelector);
         this._buttonElement = this._formElement.querySelector(this._validationConfig.submitButtonSelector);
         this._inputList.forEach((inputElement) => {
             inputElement.addEventListener('input', () => {

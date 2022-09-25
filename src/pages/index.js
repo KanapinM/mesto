@@ -31,7 +31,7 @@ function handleFormSubmit(formDataObject) {
   section.addItem(createCard(formDataObject));
 };
 const popupAddCard = new PopupWithForm(popupSelectorsAddCard, handleFormSubmit);
-popupAddCard._setEventListenner();
+popupAddCard.setEventListenner();
 
 
 const popupUserInfo = new PopupWithForm(popupUserInfoSelectors);
@@ -42,13 +42,13 @@ buttonEditProfile.addEventListener('click', () => {
   userInfo.getUserInfo();
   profileFormValidator.removeInputError();
   profileFormValidator.toggleButtonState();
-  popupUserInfo.open(popupEditProfile);
+  popupUserInfo.open();
 });
 
 buttonAddCard.addEventListener('click', () => {
   placeFormValidator.toggleButtonState();
   placeFormValidator.removeInputError();
-  popupAddCard.open(popupSelectorsAddCard.popup);
+  popupAddCard.open();
 });
 
 /*  Редактирование профиля */
@@ -56,7 +56,7 @@ buttonAddCard.addEventListener('click', () => {
 profileForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   userInfo.setUserInfo(popupUserInfo.getInputValues());
-  popupUserInfo.close(popupEditProfile);
+  popupUserInfo.close();
 });
 
 
