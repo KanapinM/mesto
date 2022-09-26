@@ -6,7 +6,7 @@ export class Card {
         this._selectors = selectors;
         this._template = document.querySelector(selectors.template).content;
         this.handleCardClick = handleCardClick;
-        // this._popupImage = document.querySelector('.popup_type_image')
+        this._popupImage = document.querySelector('.popup_type_image');
         this._element = this._getTemplate();
         this._elementPhoto = this._element.querySelector('.element__photo');
         this._elementTitle = this._element.querySelector('.element__tittle');
@@ -38,7 +38,7 @@ export class Card {
         this._elementPhoto.src = this._data.link;
         this._elementPhoto.alt = this._data.name;
         this._elementTitle.textContent = this._data.name;
-        // this._setEventListeners();
+        this._setEventListeners();
 
         return this._element;
     }

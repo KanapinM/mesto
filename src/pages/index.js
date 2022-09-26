@@ -19,7 +19,7 @@ function handleCardClick(data) {
 function createCard(data) {
   const newCard = new Card({ data, handleCardClick }, selectors);
   const cardElement = newCard.generateCard();
-
+  console.log(data);
   return cardElement;
 }
 
@@ -28,6 +28,7 @@ const popupImage = new PopupWithImage(popupSelectorsImage);
 
 
 function handleFormSubmit(formDataObject) {
+  debugger;
   section.addItem(createCard(formDataObject));
 };
 const popupAddCard = new PopupWithForm(popupSelectorsAddCard, handleFormSubmit);
