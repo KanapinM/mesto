@@ -19,19 +19,29 @@ export class PopupWithForm extends Popup {
         return formDataObject;
     }
 
-    setEventListenner() {
-        this._form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            this._submitHandler(this.getInputValues());
+    _replaceForm = (e) => {
+        e.preventDefault();
+        this._submitHandler(this.getInputValues());
 
-            this.close();
-        })
-        super.setEventListenner();
+        this.close();
+    }
+
+    setEventListenners() {
+        this._form.addEventListener('submit', this._replaceForm);
+        // (e) => {
+        //     e.preventDefault();
+        //     this._submitHandler(this.getInputValues());
+
+        //     this.close();
+        // })
+        super.setEventListenners();
 
     }
 
+
     close() {
         super.close();
+        this._form.removeEventListener('submit', this._replaceForm);
         this._form.reset();
     }
 }

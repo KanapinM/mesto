@@ -1,4 +1,4 @@
-import { initialCards, cardsContainer, buttonEditProfile, buttonAddCard, popupEditProfile, profileForm, placeForm, profileName, profileInterest, selectors, popupSelectorsImage, popupSelectorsAddCard, popupUserInfoSelectors, validationConfig } from '../scripts/constants.js';
+import { initialCards, cardsContainer, buttonEditProfile, buttonAddCard, popupEditProfile, profileForm, placeForm, profileName, profileInterest, inputName, inputInterest, selectors, popupSelectorsImage, popupSelectorsAddCard, popupUserInfoSelectors, validationConfig } from '../scripts/constants.js';
 import { Card } from '../scripts/Card.js';
 import { FormValidator } from '../scripts/FormValidator.js';
 import { PopupWithForm } from '../scripts/PopupWithForm.js';
@@ -19,7 +19,6 @@ function handleCardClick(data) {
 function createCard(data) {
   const newCard = new Card({ data, handleCardClick }, selectors);
   const cardElement = newCard.generateCard();
-  console.log(data);
   return cardElement;
 }
 
@@ -27,20 +26,22 @@ function createCard(data) {
 const popupImage = new PopupWithImage(popupSelectorsImage);
 
 
-function handleFormSubmit(formDataObject) {
-  debugger;
+function handleFormCardSubmit(formDataObject) {
   section.addItem(createCard(formDataObject));
 };
-const popupAddCard = new PopupWithForm(popupSelectorsAddCard, handleFormSubmit);
-popupAddCard.setEventListenner();
+const popupAddCard = new PopupWithForm(popupSelectorsAddCard, handleFormCardSubmit);
+// popupAddCard.setEventListenner();
 
+function handleFormInfoSubmit() {
+  userInfo.setUserInfo(popupUserInfo.getInputValues());
+}
 
-const popupUserInfo = new PopupWithForm(popupUserInfoSelectors);
+const popupUserInfo = new PopupWithForm(popupUserInfoSelectors, handleFormInfoSubmit);
 const userInfo = new UserInfo({ profileName, profileInterest });
 
-
 buttonEditProfile.addEventListener('click', () => {
-  userInfo.getUserInfo();
+  inputName.value = userInfo.getUserInfo().name;
+  inputInterest.value = userInfo.getUserInfo().interest;
   profileFormValidator.removeInputError();
   profileFormValidator.toggleButtonState();
   popupUserInfo.open();
@@ -54,11 +55,11 @@ buttonAddCard.addEventListener('click', () => {
 
 /*  Редактирование профиля */
 
-profileForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  userInfo.setUserInfo(popupUserInfo.getInputValues());
-  popupUserInfo.close();
-});
+// profileForm.addEventListener('submit', (evt) => {
+//   evt.preventDefault();
+//   userInfo.setUserInfo(popupUserInfo.getInputValues());
+//   popupUserInfo.close();
+// });
 
 
 const placeFormValidator = new FormValidator(validationConfig, placeForm);

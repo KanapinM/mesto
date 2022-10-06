@@ -1,4 +1,4 @@
-export { initialCards, cardsContainer, buttonEditProfile, buttonAddCard, popupEditProfile, profileForm, placeForm, profileName, profileInterest, selectors, popupSelectorsImage, popupSelectorsAddCard, popupUserInfoSelectors, validationConfig };
+export { initialCards, cardsContainer, buttonEditProfile, buttonAddCard, popupEditProfile, profileForm, placeForm, profileName, profileInterest, inputName, inputInterest, selectors, popupSelectorsImage, popupSelectorsAddCard, popupUserInfoSelectors, validationConfig };
 const initialCards = [
     {
         name: 'Москва',
@@ -38,6 +38,8 @@ const placeForm = document.querySelector('.popup__form_type_place');
 const profileName = document.querySelector('.profile__name');
 const profileInterest = document.querySelector('.profile__interest');
 
+const inputName = document.querySelector('.popup__input_type_name');
+const inputInterest = document.querySelector('.popup__input_type_interest');
 
 const selectors = {
     template: '.element-template'
