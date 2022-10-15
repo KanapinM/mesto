@@ -12,9 +12,6 @@ export class UserInfo {
             name: this._name.textContent,
             interest: this._interest.textContent
         }
-
-        // this._inputName.value = this._name.textContent;
-        // this._inputInterest.value = this._interest.textContent;
     }
 
     setUserInfo(formData) {
