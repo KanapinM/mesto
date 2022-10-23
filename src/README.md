@@ -7,5 +7,4 @@
 Страница спроектирована на html с применением css стилей и поддержкой JavaScript.
 Поддерживается актуальными браузерами на июнь 2022 года.
 
-https://kanapinm.github.io/mesto/index.html 
 https://kanapinm.github.io/mesto/
