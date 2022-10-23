@@ -8,3 +8,4 @@
 Поддерживается актуальными браузерами на июнь 2022 года.
 
 https://kanapinm.github.io/mesto/index.html 
+https://kanapinm.github.io/mesto/
