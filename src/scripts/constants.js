@@ -29,8 +29,8 @@ const initialCards = [
 const apiConfig = {
     baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-52',
     headers: {
-        authorization: 'e0b445b1-a635-48e2-bbd4-c08ec3e337e5',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        authorization: 'e0b445b1-a635-48e2-bbd4-c08ec3e337e5'
     },
 }
 

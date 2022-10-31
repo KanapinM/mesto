@@ -5,7 +5,9 @@ export class Api {
     }
 
     getInitialCards() {
-        return fetch(`${this._url}/cards`)
+        return fetch(`${this._url}/cards`, {
+            headers: this._headers,
+        })
             .then((responce) => {
                 console.log(responce);
             })
