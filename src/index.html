@@ -18,7 +18,7 @@
         <main class="content">
             <section class="profile">
                 <div class="profile__column">
-                    <img class="profile__avatar" src="<%=require('./images/custo.jpg')%>" alt="аватар пользователя">
+                    <div class="profile__avatar"></div>
                     <div class="profile__info">
                         <div class="profile__edit">
                             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -81,17 +81,39 @@
                 </p>
             </div>
         </div>
-    </div>
-    <template class="element-template">
-        <article id="template" class="element">
-            <button type="button" class="element__delete-button"></button>
-            <img class="element__photo" src="#" alt="">
-            <div class="element__place">
-                <h2 class="element__tittle"></h2>
-                <button type="button" aria-label="like" class="element__like"></button>
+        <div class="popup popup_type_change_avatar">
+            <button type="button" class="popup__close-button popup__close-button_place"></button>
+            <div class="popup__container">
+                <h2 class="popup__title">Обновить аватар</h2>
+                <form name="popup__form" class="popup__form popup__form_type_avatar" novalidate>
+                    <input type="url" name="link" class="popup__input popup__input_type_avatar" id="href-input" required
+                        placeholder="Ссылка на картинку">
+                    <span class="popup__input-error href-input-error"></span>
+
+                    <button type="submit" class="popup__submit-button popup__submit-button_type_avatar">Создать</button>
+                </form>
             </div>
-        </article>
-    </template>
+        </div>
+        <div class="popup popup_type_agreement">
+            <button type="button" class="popup__close-button popup__close-button_agreement"></button>
+            <div class="popup__container">
+                <h2 class="popup__title popup__title_agreement">Вы уверены?</h2>
+                <button type="submit" class="popup__submit-button popup__submit-button_type_agreement">Да</button>
+            </div>
+        </div>
+        <template class="element-template">
+            <article id="template" class="element">
+                <button type="button" class="element__delete-button"></button>
+                <img class="element__photo" src="#" alt="">
+                <div class="element__place">
+                    <h2 class="element__tittle"></h2>
+                    <div class="element__container">
+                        <button type="button" aria-label="like" class="element__like-button"></button>
+                        <p class="cards__likes-scorer">0</p>
+                    </div>
+                </div>
+            </article>
+        </template>
 </body>
 
 </html>

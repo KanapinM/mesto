@@ -1,4 +1,4 @@
-export { initialCards, cardsContainer, buttonEditProfile, buttonAddCard, popupEditProfile, profileForm, placeForm, profileName, profileInterest, inputName, inputInterest, selectors, popupSelectorsImage, popupSelectorsAddCard, popupUserInfoSelectors, validationConfig };
+export { apiConfig, initialCards, cardsContainer, buttonEditProfile, buttonAddCard, avatarImage, profileForm, placeForm, avatarForm, profileName, profileInterest, inputName, inputInterest, selectors, popupSelectorsImage, popupSelectorsAddCard, popupUserInfoSelectors, popupAvatarSelectors, validationConfig };
 const initialCards = [
     {
         name: 'Москва',
@@ -26,20 +26,30 @@ const initialCards = [
     }
 ];
 
+const apiConfig = {
+    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-52',
+    headers: {
+        authorization: 'e0b445b1-a635-48e2-bbd4-c08ec3e337e5',
+        'Content-Type': 'application/json'
+    },
+}
+
 const cardsContainer = document.querySelector('.elements');
 
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 const buttonAddCard = document.querySelector('.profile__add-button');
-const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 
 const profileForm = document.querySelector('.popup__form_type_profile');
 const placeForm = document.querySelector('.popup__form_type_place');
+const avatarForm = document.querySelector('.popup__form_type_avatar');
 
 const profileName = document.querySelector('.profile__name');
 const profileInterest = document.querySelector('.profile__interest');
 
 const inputName = document.querySelector('.popup__input_type_name');
 const inputInterest = document.querySelector('.popup__input_type_interest');
+
+const avatarImage = document.querySelector('.profile__avatar');
 
 const selectors = {
     template: '.element-template'
@@ -58,6 +68,11 @@ const popupUserInfoSelectors = {
     popupOpenedClass: 'popup_open',
     popupForm: '.popup__form_type_profile'
 }
+const popupAvatarSelectors = {
+    popup: 'popup_type_change_avatar',
+    popupOpenedClass: 'popup_open',
+    popupForm: '.popup__form_type_avatar'
+}
 const validationConfig = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
@@ -67,3 +82,4 @@ const validationConfig = {
     errorClass: 'popup__input-error_active',
     error: '.popup__input-error'
 };
+
