@@ -51,19 +51,18 @@ function downloadPage() {
                 popupImage.open(data);
               },
 
-              // handleCardRemove
+              // handleRemoveCard
               (cardId) => {
                 api.removeCard(cardId);
               },
-              // НЕ ПОНЯЛ КОМЕНТАРИЯ ПО ПОВОДУ УДАЛЕНИЯ КАРТОЧЕК. У МЕНЯ ИКОНКА ВПОЛНЕ КОРРЕКТНО ПОЯВЛЯЕТСЯ И УДАЛЯЕТСЯ
-              // ПРУФЫ: https://disk.yandex.ru/d/ELAgUpq70ZVb0A
 
-              // handleLike
+
+              // handleAddlike
               (cardId) => {
                 return api.likeCard(cardId);
               },
 
-              // handleUnlike
+              // handleRemovelike
               (cardId) => {
                 return api.unlikeCard(cardId);
               },
