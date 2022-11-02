@@ -9,6 +9,7 @@ export class Section {
     }
 
     renderItems(dataArray) {
+        dataArray.reverse();
         dataArray.forEach(dataItem => {
             this._renderer(dataItem);
         });

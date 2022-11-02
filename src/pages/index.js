@@ -1,4 +1,4 @@
-import { apiConfig, initialCards, cardsContainer, buttonEditProfile, buttonAddCard, avatarImage, avatarForm, profileForm, placeForm, profileName, profileInterest, inputName, inputInterest, selectors, popupSelectorsImage, popupSelectorsAddCard, popupUserInfoSelectors, popupAvatarSelectors, validationConfig } from '../scripts/constants.js';
+import { apiConfig, /*initialCards,*/ cardsContainer, buttonEditProfile, buttonAddCard, avatar, avatarForm, profileForm, placeForm, profileName, profileAbout, inputName, inputAbout, selectors, popupSelectorsImage, popupSelectorsAddCard, popupUserInfoSelectors, popupAvatarSelectors, validationConfig } from '../scripts/constants.js';
 import { Card } from '../scripts/Card.js';
 import { FormValidator } from '../scripts/FormValidator.js';
 import { PopupWithForm } from '../scripts/PopupWithForm.js';
@@ -9,51 +9,172 @@ import { UserInfo } from '../scripts/UserInfo.js';
 import './index.css';
 import { Api } from '../scripts/Api.js';
 
-const section = new Section(cardsContainer, (data) => {
-  section.addItem(createCard(data))
-})
-section.renderItems(initialCards);
+const userInfo = new UserInfo({ profileName, profileAbout });///
+function submitButtonText(submitButton, text) {
+  submitButton.textContent = text;
+}
+const api = new Api(apiConfig);
+
+function downloadPage() {
+  return Promise.all([api.getUserData(), api.getInitialCards()])
+    .catch((err) => console.log(err))
+    .then(([user, cards]) => {
+      // debugger;
+      userInfo.setUserInfo({
+        name: user.name,
+        about: user.about,
+        id: user._id,
+        avatar: user.avatar,
+      });
+
+      avatar.style.backgroundImage = `url('${user.avatar}')`;
+      return [user, cards];
+
+    })
+    .catch((err) => console.log(err))
+    .then(([user, cards]) => {
+      // const array = cards.reverse(); // Разворачиваем массив, что бы новые карточки появлялись в начале.
+      // console.log(array);
+      console.log(cards);
+      debugger;
+      return (cardList = new Section(
+        {
+          cardsContainer,
+          renderer: (item, cardsContainer) => {
+            console.log(item);
+            const card = new Card(
+              item,
+              selectors,
+
+              //handleCardClick
+              (data) => {
+                popupImage.open(data);
+              },
+
+              // handleCardRemove
+              (cardId) => {
+                api.removeCard(cardId);
+              },
+              // НЕ ПОНЯЛ КОМЕНТАРИЯ ПО ПОВОДУ УДАЛЕНИЯ КАРТОЧЕК. У МЕНЯ ИКОНКА ВПОЛНЕ КОРРЕКТНО ПОЯВЛЯЕТСЯ И УДАЛЯЕТСЯ
+              // ПРУФЫ: https://disk.yandex.ru/d/ELAgUpq70ZVb0A
+
+              // handleLike
+              (cardId) => {
+                return api.likeCard(cardId);
+              },
+
+              // handleUnlike
+              (cardId) => {
+                return api.unlikeCard(cardId);
+              },
+
+              userInfo.getUserId()
+
+            ).generateCard();
+
+            cardsContainer.prepend(card);
+          },
+        }/*эта по-идее не нужна*/
+      ));//точно остается
+    })//точно остается
+    .then((res) => res.renderItems())
+    .catch((err) => console.log(err));
+}
+
+downloadPage();
+
+// const section = new Section(cardsContainer, (data) => {
+//   section.addItem(createCard(data))
+// })
+
+// const api = new Api(apiConfig);
+// api.getInitialCards()
+//   .then((data) => {
+//     console.log(data);
+//     section.renderItems(data);
+//   })
+//   .catch(function (err) {
+//     console.error('Ошибка', err);
+//   })
+
+// console.log(api.getUserData());
+
+// function createCard(data) {
+//   const newCard = new Card(data, selectors, handleCardClick, handleRemoveCard, handleAddlike, handleRemovelike);
+//   const cardElement = newCard.generateCard();
+//   return cardElement;
+// }
+
+// function handleCardClick(data) {
+//   popupImage.open(data);
+// }
+// function handleRemoveCard(cardId) {
+//   // console.log(cardId);
+//   api.removeCard(cardId);
+// }
+// function handleAddlike(cardId) {
+//   // console.log(cardId);
+//   return api.likeCard(cardId);
+// }
+// function handleRemovelike(cardId) {
+//   // console.log(cardId);
+//   return api.unlikeCard(cardId);
+// }
 
 
-function handleCardClick(data) {
-  popupImage.open(data);
-}
-function createCard(data) {
-  const newCard = new Card({ data, handleCardClick }, selectors);
-  const cardElement = newCard.generateCard();
-  return cardElement;
-}
+
+
 
 
 const popupImage = new PopupWithImage(popupSelectorsImage);
 
-
-function handleFormCardSubmit(formDataObject) {
-  section.addItem(createCard(formDataObject));
-};
 const popupAddCard = new PopupWithForm(popupSelectorsAddCard, handleFormCardSubmit);
-// popupAddCard.setEventListenner();
-
-function handleFormInfoSubmit() {
-  userInfo.setUserInfo(popupUserInfo.getInputValues());
-}
-
-function handleFormAvatar() {
-  console.log(popupChangeAvatar.getInputValues());
-  avatarImage.src = popupChangeAvatar.getInputValues().link;
-  console.log(avatarImage.src);
-}
-
+function handleFormCardSubmit(formDataObject) {
+  api.addCard(formDataObject)
+    .then(function (formDataObject) {
+      section.addItem(createCard(formDataObject))
+    })
+    .catch(function (err) {
+      console.error('Ошибка', err);
+    })
+};
 
 const popupUserInfo = new PopupWithForm(popupUserInfoSelectors, handleFormInfoSubmit);
-const userInfo = new UserInfo({ profileName, profileInterest });
+function handleFormInfoSubmit(userData) {
+  console.log(userData);
+  submitButtonText(buttonEditProfile, 'Сохранение...');
+  console.log(buttonEditProfile);
+  api.editUserData(userData)
+    .then(function (userData) {
+      // userInfo.setUserInfo(popupUserInfo.getInputValues(userData));***
+      userInfo.setUserInfo(userData);
+      console.log(userData);
+    })
+    .catch(function (err) {
+      console.error('Ошибка', err);
+    })
+}
 
 const popupChangeAvatar = new PopupWithForm(popupAvatarSelectors, handleFormAvatar);
+function handleFormAvatar(url) {
+  // console.log(url.link);***
+  //  avatarImage.style.backgroundImage = 'popupChangeAvatar.getInputValues().link';***
+  console.log(url.link);
+  api.changeAvatar(url.link);
+  //   .then(function (url) {***
+  //     avatarImage.style.backgroundImage = popupChangeAvatar.getInputValues(url).link;***
 
-const api = new Api(apiConfig);
-api.getInitialCards();
+  avatar.style.backgroundImage = `url('${popupChangeAvatar.getInputValues(url).link}')`;
+  // avatar.style.backgroundImage = `popupChangeAvatar.getInputValues(url);****
+  //   })
+  //   .catch(function (err) {***
+  //     console.error('Ошибка', err);***
+  //   })***
+  // console.log(`url('${popupChangeAvatar.getInputValues(url).link}')`);***
+}
 
-avatarImage.addEventListener('click', () => {
+
+avatar.addEventListener('click', () => {
   avatarFormValidator.toggleButtonState();
   avatarFormValidator.removeInputError();
   popupChangeAvatar.open();
@@ -61,7 +182,7 @@ avatarImage.addEventListener('click', () => {
 
 buttonEditProfile.addEventListener('click', () => {
   inputName.value = userInfo.getUserInfo().name;
-  inputInterest.value = userInfo.getUserInfo().interest;
+  inputAbout.value = userInfo.getUserInfo().about;
   profileFormValidator.removeInputError();
   profileFormValidator.toggleButtonState();
   popupUserInfo.open();
@@ -76,10 +197,10 @@ buttonAddCard.addEventListener('click', () => {
 
 /*  Редактирование профиля */
 
-// profileForm.addEventListener('submit', (evt) => {
-//   evt.preventDefault();
-//   userInfo.setUserInfo(popupUserInfo.getInputValues());
-//   popupUserInfo.close();
+// profileForm.addEventListener('submit', (evt) => {***
+//   evt.preventDefault();***
+//   userInfo.setUserInfo(popupUserInfo.getInputValues());***
+//   popupUserInfo.close();***
 // });
 
 
@@ -89,3 +210,6 @@ const profileFormValidator = new FormValidator(validationConfig, profileForm);
 profileFormValidator.enableValidation();
 const avatarFormValidator = new FormValidator(validationConfig, avatarForm);
 avatarFormValidator.enableValidation();
+
+// console.log(userInfo.getUserInfo());//
+// section.renderItems(initialCards);***

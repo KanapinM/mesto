@@ -1,4 +1,4 @@
-.profile__interest {
+.profile__about {
     margin: 8px 0 0;
     max-width: 500px;
     font-family: 'Inter', Arial, sans-serif;
@@ -11,7 +11,7 @@
 }
 
 @media screen and (max-width: 1024px) {
-    .profile__interest {
+    .profile__about {
         margin: 8px auto 34px;
         font-size: 14px;
         text-align: center;
