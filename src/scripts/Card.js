@@ -8,8 +8,8 @@ export class Card {
         this._likes = data.likes.length;
         this._userId = userId;
 
-        this._selectors = selectors;
-        this._template = document.querySelector(selectors.template).content;
+        this._selectorsTemplate = selectors.content;
+        // this._template = document.querySelector(selectors.template).content;
         this.handleCardClick = handleCardClick;
         this._handleRemoveCard = handleRemoveCard;
         this._handleRemoveCard = handleRemoveCard.bind(this);
@@ -56,7 +56,7 @@ export class Card {
 
 
     _getTemplate() {
-        const cardElement = this._template.querySelector('.element').cloneNode(true);
+        const cardElement = this._selectorsTemplate.querySelector('.element').cloneNode(true);
         return cardElement;
     }
 

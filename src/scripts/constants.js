@@ -51,9 +51,8 @@ const inputAbout = document.querySelector('.popup__input_type_about');
 
 const avatar = document.querySelector('.profile__avatar');
 
-const selectors = {
-    template: '.element-template'
-}
+const selectors = document.querySelector('.element-template');
+
 const popupSelectorsImage = {
     popup: 'popup_type_image',
     popupOpenedClass: 'popup_open'

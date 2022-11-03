@@ -9,6 +9,7 @@ import { UserInfo } from '../scripts/UserInfo.js';
 import './index.css';
 import { Api } from '../scripts/Api.js';
 
+
 const userInfo = new UserInfo({ profileName, profileAbout });///
 function submitButtonText(submitButton, text) {
   submitButton.textContent = text;
@@ -26,65 +27,65 @@ function downloadPage() {
         id: user._id,
         avatar: user.avatar,
       });
-
       avatar.style.backgroundImage = `url('${user.avatar}')`;
       return [user, cards];
 
     })
     .catch((err) => console.log(err))
     .then(([user, cards]) => {
-      // const array = cards.reverse(); // Разворачиваем массив, что бы новые карточки появлялись в начале.
-      // console.log(array);
-      console.log(cards);
-      debugger;
-      return (cardList = new Section(
-        {
-          cardsContainer,
-          renderer: (item, cardsContainer) => {
-            console.log(item);
-            const card = new Card(
-              item,
-              selectors,
+      // console.log(cards);
+      let section = {};
+      function renderer(dataCard, cardsContainer) {
+        const card = new Card(
+          dataCard,
+          selectors,
 
-              //handleCardClick
-              (data) => {
-                popupImage.open(data);
-              },
-
-              // handleRemoveCard
-              (cardId) => {
-                api.removeCard(cardId);
-              },
-
-
-              // handleAddlike
-              (cardId) => {
-                return api.likeCard(cardId);
-              },
-
-              // handleRemovelike
-              (cardId) => {
-                return api.unlikeCard(cardId);
-              },
-
-              userInfo.getUserId()
-
-            ).generateCard();
-
-            cardsContainer.prepend(card);
+          //handleCardClick
+          (dataCard) => {
+            popupImage.open(dataCard);
           },
-        }/*эта по-идее не нужна*/
-      ));//точно остается
-    })//точно остается
+
+          // handleRemoveCard
+          (cardId) => {
+            api.removeCard(cardId);
+          },
+
+
+          // handleAddlike
+          (cardId) => {
+            return api.likeCard(cardId);
+          },
+
+          // handleRemovelike
+          (cardId) => {
+            return api.unlikeCard(cardId);
+          },
+
+          userInfo.getUserId()
+
+        ).generateCard();
+        // return card;
+        // cardsContainer.prepend(card);
+      }
+      section = new Section({ cards, renderer }, cardsContainer);
+      section.addItem(card);
+      console.log(cards);
+      console.log(section);
+      debugger;
+      return section;
+    })
     .then((res) => res.renderItems())
     .catch((err) => console.log(err));
 }
 
 downloadPage();
 
-// const section = new Section(cardsContainer, (data) => {
-//   section.addItem(createCard(data))
-// })
+
+
+// const section = new Section({ array, renderer }, cardsContainer)
+// function renderer(data) {
+//   section.addItem(createCard(data));
+// }
 
 // const api = new Api(apiConfig);
 // api.getInitialCards()
@@ -96,7 +97,7 @@ downloadPage();
 //     console.error('Ошибка', err);
 //   })
 
-// console.log(api.getUserData());
+// console.log(api);
 
 // function createCard(data) {
 //   const newCard = new Card(data, selectors, handleCardClick, handleRemoveCard, handleAddlike, handleRemovelike);
