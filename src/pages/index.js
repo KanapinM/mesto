@@ -9,7 +9,8 @@ import { UserInfo } from '../scripts/UserInfo.js';
 import './index.css';
 import { Api } from '../scripts/Api.js';
 
-
+console.log(12);
+console.log(cardsContainer);//#
 const userInfo = new UserInfo({ profileName, profileAbout });///
 function submitButtonText(submitButton, text) {
   submitButton.textContent = text;
@@ -64,14 +65,15 @@ function downloadPage() {
           userInfo.getUserId()
 
         ).generateCard();
-        // return card;
-        // cardsContainer.prepend(card);
+        console.log(cardsContainer);
+        // cardsContainer.prepend(card);//- как было
       }
+      // console.log();
       section = new Section({ cards, renderer }, cardsContainer);
-      section.addItem(card);
+      section.addItem(cards);//-как предлагает Наставник
       console.log(cards);
       console.log(section);
-      debugger;
+      // debugger;
       return section;
     })
     .then((res) => res.renderItems())
@@ -82,7 +84,7 @@ downloadPage();
 
 
 
-// const section = new Section({ array, renderer }, cardsContainer)
+// const section = new Section(renderer, cardsContainer)
 // function renderer(data) {
 //   section.addItem(createCard(data));
 // }

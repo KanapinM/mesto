@@ -35,6 +35,7 @@ const apiConfig = {
 }
 
 const cardsContainer = document.querySelector('.elements');
+console.log(cardsContainer);
 
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 const buttonAddCard = document.querySelector('.profile__add-button');
