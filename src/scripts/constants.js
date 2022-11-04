@@ -71,7 +71,7 @@ const popupUserInfoSelectors = {
     popupForm: '.popup__form_type_profile'
 }
 const popupAvatarSelectors = {
-    popup: 'popup_type_change_avatar',
+    popup: 'popup_type_change-avatar',
     popupOpenedClass: 'popup_open',
     popupForm: '.popup__form_type_avatar'
 }
