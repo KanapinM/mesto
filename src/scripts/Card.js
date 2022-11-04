@@ -74,7 +74,7 @@ export class Card {
         //     })
         // })
         this._buttonDelete.addEventListener('click', () => {
-            this._handleRemoveCard(this._cardId);
+            this._handleRemoveCard(this._element, this._cardId);
         });
 
 
@@ -124,7 +124,7 @@ export class Card {
         } else {
             this._likesScorer.textContent = 0;
         };
-
+        // console.log(this._userId === this._cardOwnerId);
         return this._element;
     }
 }

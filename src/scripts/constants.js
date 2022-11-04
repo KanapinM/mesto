@@ -1,4 +1,4 @@
-export { apiConfig, /*initialCards,*/ cardsContainer, buttonEditProfile, buttonAddCard, avatar, profileForm, placeForm, avatarForm, profileName, profileAbout, inputName, inputAbout, selectors, popupSelectorsImage, popupSelectorsAddCard, popupUserInfoSelectors, popupAvatarSelectors, validationConfig };
+export { apiConfig, /*initialCards,*/ cardsContainer, buttonEditProfile, buttonAddCard, buttonSubmitProfile, buttonSubmitCard, buttonSubmitAvatar, avatar, profileForm, placeForm, avatarForm, profileName, profileAbout, inputName, inputAbout, selectors, popupSelectorsImage, popupSelectorsAddCard, popupUserInfoSelectors, popupAgreementSelectors, popupAvatarSelectors, validationConfig };
 // const initialCards = [
 //     {
 //         name: 'Москва',
@@ -35,10 +35,12 @@ const apiConfig = {
 }
 
 const cardsContainer = document.querySelector('.elements');
-console.log(cardsContainer);
 
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 const buttonAddCard = document.querySelector('.profile__add-button');
+const buttonSubmitProfile = document.querySelector('.popup__submit-button_type_profile');
+const buttonSubmitCard = document.querySelector('.popup__submit-button_type_place');
+const buttonSubmitAvatar = document.querySelector('.popup__submit-button_type_avatar');
 
 const profileForm = document.querySelector('.popup__form_type_profile');
 const placeForm = document.querySelector('.popup__form_type_place');
@@ -72,6 +74,10 @@ const popupAvatarSelectors = {
     popup: 'popup_type_change_avatar',
     popupOpenedClass: 'popup_open',
     popupForm: '.popup__form_type_avatar'
+}
+const popupAgreementSelectors = {
+    popup: 'popup_type_agreement',
+    popupOpenedClass: 'popup_open'
 }
 const validationConfig = {
     formSelector: '.popup__form',

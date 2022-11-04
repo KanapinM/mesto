@@ -1,4 +1,4 @@
-import { apiConfig, /*initialCards,*/ cardsContainer, buttonEditProfile, buttonAddCard, avatar, avatarForm, profileForm, placeForm, profileName, profileAbout, inputName, inputAbout, selectors, popupSelectorsImage, popupSelectorsAddCard, popupUserInfoSelectors, popupAvatarSelectors, validationConfig } from '../scripts/constants.js';
+import { apiConfig, /*initialCards,*/ cardsContainer, buttonEditProfile, buttonAddCard, buttonSubmitProfile, buttonSubmitCard, buttonSubmitAvatar, avatar, avatarForm, profileForm, placeForm, profileName, profileAbout, inputName, inputAbout, selectors, popupSelectorsImage, popupSelectorsAddCard, popupUserInfoSelectors, popupAvatarSelectors, popupAgreementSelectors, validationConfig } from '../scripts/constants.js';
 import { Card } from '../scripts/Card.js';
 import { FormValidator } from '../scripts/FormValidator.js';
 import { PopupWithForm } from '../scripts/PopupWithForm.js';
@@ -9,87 +9,19 @@ import { UserInfo } from '../scripts/UserInfo.js';
 import './index.css';
 import { Api } from '../scripts/Api.js';
 
-console.log(12);
-console.log(cardsContainer);//#
+
 const userInfo = new UserInfo({ profileName, profileAbout });///
 function submitButtonText(submitButton, text) {
   submitButton.textContent = text;
 }
-const api = new Api(apiConfig);
-
-function downloadPage() {
-  return Promise.all([api.getUserData(), api.getInitialCards()])
-    .catch((err) => console.log(err))
-    .then(([user, cards]) => {
-      // debugger;
-      userInfo.setUserInfo({
-        name: user.name,
-        about: user.about,
-        id: user._id,
-        avatar: user.avatar,
-      });
-      avatar.style.backgroundImage = `url('${user.avatar}')`;
-      return [user, cards];
-
-    })
-    .catch((err) => console.log(err))
-    .then(([user, cards]) => {
-      // console.log(cards);
-      let section = {};
-      function renderer(dataCard, cardsContainer) {
-        const card = new Card(
-          dataCard,
-          selectors,
-
-          //handleCardClick
-          (dataCard) => {
-            popupImage.open(dataCard);
-          },
-
-          // handleRemoveCard
-          (cardId) => {
-            api.removeCard(cardId);
-          },
 
 
-          // handleAddlike
-          (cardId) => {
-            return api.likeCard(cardId);
-          },
-
-          // handleRemovelike
-          (cardId) => {
-            return api.unlikeCard(cardId);
-          },
-
-          userInfo.getUserId()
-
-        ).generateCard();
-        console.log(cardsContainer);
-        // cardsContainer.prepend(card);//- как было
-      }
-      // console.log();
-      section = new Section({ cards, renderer }, cardsContainer);
-      section.addItem(cards);//-как предлагает Наставник
-      console.log(cards);
-      console.log(section);
-      // debugger;
-      return section;
-    })
-    .then((res) => res.renderItems())
-    .catch((err) => console.log(err));
+const section = new Section(renderer, cardsContainer)
+function renderer(data) {
+  section.addItem(createCard(data));
 }
 
-downloadPage();
-
-
-
-// const section = new Section(renderer, cardsContainer)
-// function renderer(data) {
-//   section.addItem(createCard(data));
-// }
-
-// const api = new Api(apiConfig);
+const api = new Api(apiConfig);
 // api.getInitialCards()
 //   .then((data) => {
 //     console.log(data);
@@ -101,29 +33,55 @@ downloadPage();
 
 // console.log(api);
 
-// function createCard(data) {
-//   const newCard = new Card(data, selectors, handleCardClick, handleRemoveCard, handleAddlike, handleRemovelike);
-//   const cardElement = newCard.generateCard();
-//   return cardElement;
-// }
+function createCard(data) {
+  const newCard = new Card(data, selectors, handleCardClick, handleRemoveCard, handleAddlike, handleRemovelike, userInfo.getUserId());
+  const cardElement = newCard.generateCard();
+  return cardElement;
+}
 
-// function handleCardClick(data) {
-//   popupImage.open(data);
-// }
-// function handleRemoveCard(cardId) {
-//   // console.log(cardId);
-//   api.removeCard(cardId);
-// }
-// function handleAddlike(cardId) {
-//   // console.log(cardId);
-//   return api.likeCard(cardId);
-// }
-// function handleRemovelike(cardId) {
-//   // console.log(cardId);
-//   return api.unlikeCard(cardId);
-// }
+function handleCardClick(data) {
+  popupImage.open(data);
+}
+function handleRemoveCard(card, cardId) {
+  // console.log(cardId);
+  popupAgreement.open(card, cardId);
+  // api.removeCard(cardId);
+  // card.remove(card, cardId);
+}
+function handleAddlike(cardId) {
+  return api.likeCard(cardId);
+}
+function handleRemovelike(cardId) {
+  return api.unlikeCard(cardId);
+}
 
 
+
+
+// Вариант
+function downloadPage() {
+  return Promise.all([api.getUserData(), api.getInitialCards()])
+    .catch((err) => console.log(err))
+    .then(([user, cards]) => {
+      userInfo.setUserInfo({
+        name: user.name,
+        about: user.about,
+        id: user._id,
+        avatar: user.avatar,
+      });
+      avatar.style.backgroundImage = `url('${user.avatar}')`;
+      return [user, cards];
+    })
+    .catch((err) => console.log(err))
+    .then(([user, cards]) => {
+      section.renderItems(cards);
+
+      // return (cardList = new Section( { }, '.cards' ));
+    })
+    // .then((res) => res.addItems())
+    .catch((err) => console.log(err));
+}
+downloadPage();
 
 
 
@@ -132,49 +90,58 @@ const popupImage = new PopupWithImage(popupSelectorsImage);
 
 const popupAddCard = new PopupWithForm(popupSelectorsAddCard, handleFormCardSubmit);
 function handleFormCardSubmit(formDataObject) {
+  submitButtonText(buttonSubmitCard, 'Сохранение...');
   api.addCard(formDataObject)
     .then(function (formDataObject) {
       section.addItem(createCard(formDataObject))
     })
     .catch(function (err) {
-      console.error('Ошибка', err);
+      console.error('Ошибка при добавлении карточки', err);
     })
+    .finally((res) => submitButtonText(buttonSubmitCard, 'Сохранить'));
 };
+console.log(userInfo);
 
 const popupUserInfo = new PopupWithForm(popupUserInfoSelectors, handleFormInfoSubmit);
 function handleFormInfoSubmit(userData) {
-  console.log(userData);
-  submitButtonText(buttonEditProfile, 'Сохранение...');
-  console.log(buttonEditProfile);
+  submitButtonText(buttonSubmitProfile, 'Сохранение...');
   api.editUserData(userData)
     .then(function (userData) {
       // userInfo.setUserInfo(popupUserInfo.getInputValues(userData));***
       userInfo.setUserInfo(userData);
-      console.log(userData);
     })
     .catch(function (err) {
-      console.error('Ошибка', err);
+      console.error('Ошибка при изменении данных о пользователе', err);
     })
+    .finally((res) => submitButtonText(buttonSubmitProfile, 'Сохранить'));
 }
 
 const popupChangeAvatar = new PopupWithForm(popupAvatarSelectors, handleFormAvatar);
 function handleFormAvatar(url) {
-  // console.log(url.link);***
   //  avatarImage.style.backgroundImage = 'popupChangeAvatar.getInputValues().link';***
-  console.log(url.link);
-  api.changeAvatar(url.link);
-  //   .then(function (url) {***
-  //     avatarImage.style.backgroundImage = popupChangeAvatar.getInputValues(url).link;***
-
-  avatar.style.backgroundImage = `url('${popupChangeAvatar.getInputValues(url).link}')`;
-  // avatar.style.backgroundImage = `popupChangeAvatar.getInputValues(url);****
-  //   })
-  //   .catch(function (err) {***
-  //     console.error('Ошибка', err);***
-  //   })***
-  // console.log(`url('${popupChangeAvatar.getInputValues(url).link}')`);***
+  submitButtonText(buttonSubmitAvatar, 'Сохранение...');
+  api.changeAvatar(url.link)
+    .then(function (responce) {
+      console.log(responce);
+      avatar.style.backgroundImage = `url('${responce.avatar}')`;
+      // avatar.style.backgroundImage = `url('${popupChangeAvatar.getInputValues(url).link}')`
+    })
+    .catch(function (err) {
+      console.error('Ошибка при изменении аватара пользователя', err);
+    })
+    .finally((response) => submitButtonText(buttonSubmitAvatar, 'Сохранить'));
 }
 
+
+const popupAgreement = new PopupAgreement(popupAgreementSelectors, answer)
+function answer(card, cardId) {
+  api.removeCard(cardId);
+  card.remove(card, cardId);
+  popupAgreement.close();
+}
+
+
+popupAgreement.setEventListeners();
 
 avatar.addEventListener('click', () => {
   avatarFormValidator.toggleButtonState();

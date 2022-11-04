@@ -33,7 +33,7 @@ export class Api {
     }
 
     changeAvatar(url) {
-        console.log(url);
+        // console.log(url);
         return fetch(`${this._url}/users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,

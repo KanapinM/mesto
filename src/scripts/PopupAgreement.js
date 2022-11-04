@@ -1,11 +1,11 @@
 import { Popup } from "./Popup.js";
 
 export class PopupAgreement extends Popup {
-    constructor(popup, agree) {
-        super(popup);
+    constructor(selectors, answer) {
+        super(selectors);
         this._agreementSubmitButton = this._popup.querySelector('.popup__submit-button_type_agreement');
-        this._agree = agree;
-        this._agree = this._agree.bind(this);
+        this._answer = answer;
+        // this._answer = this._answer.bind(this);
     }
 
     open(card, id) {
@@ -16,8 +16,18 @@ export class PopupAgreement extends Popup {
 
     setEventListeners() {
         super.setEventListeners();
+        // this._agreementSubmitButton.addEventListener('click', (evt) => {
+        //     if (evt.target === evt.currentTarget) {
+        //         console.log(true);
+        //     } else {
+        //         console.log(false);
+        //     }
+        // })
+
         this._agreementSubmitButton.addEventListener('click', () => {
-            this._agree(this.card, this.id);
+            this._answer(this.card, this.id);
         });
+
+
     }
 }
