@@ -22,7 +22,7 @@
 .cards__likes-scorer{color:#000;font-size:13px;font-weight:400;margin:0;text-align:center}
 .element__like-button{align-self:center;background-color:transparent;background-image:url(87ed371465c7a6a1cd01.svg);background-size:cover;border:none;cursor:pointer;margin:0;min-height:19px;min-width:22px;padding:0;transition:.3s ease-in-out}.element__like-button:hover{opacity:.5}
 .element__like-button_active{background-image:url(e787eeb70bb65b7b453a.svg)}
-.element__delete-button{background-color:transparent;background-image:url(823b0cf1b0b7e9cb7cad.svg);background-size:cover;border:none;cursor:pointer;min-height:19px;position:absolute;right:20px;top:20px;transition:.3s ease-in-out;width:18px;z-index:1}.element__delete-button:hover{opacity:.5}
+.element__delete-button{background-color:transparent;background-image:url(823b0cf1b0b7e9cb7cad.svg);background-size:cover;border:none;cursor:pointer;display:none;min-height:19px;position:absolute;right:20px;top:20px;transition:.3s ease-in-out;width:18px;z-index:1}.element__delete-button:hover{opacity:.5}
 .element__delete-button_active{display:block}
 .popup{align-items:center;background:rgba(0,0,0,.5);display:flex;flex-direction:column;height:100%;justify-content:center;left:0;margin-bottom:8px;opacity:0;overflow-y:auto;position:fixed;top:0;transition:.3s ease-in-out;visibility:hidden;width:100%;z-index:2}
 .popup_open{opacity:1;visibility:visible}
