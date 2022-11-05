@@ -9,7 +9,6 @@ export class Card {
         this._userId = userId;
 
         this._selectorsTemplate = selectors.content;
-        // this._template = document.querySelector(selectors.template).content;
         this.handleCardClick = handleCardClick;
         this._handleRemoveCard = handleRemoveCard;
         this._handleRemoveCard = handleRemoveCard.bind(this);
@@ -28,17 +27,10 @@ export class Card {
         this._buttonDelete = this._element.querySelector('.element__delete-button');
         this._buttonLike = this._element.querySelector('.element__like-button');
         this._likesScorer = this._element.querySelector('.cards__likes-scorer');
-
-
-        // this.agreementSubmitButton = document.querySelector('.popup__submit-button_type_agreement');
-        // this.popupAgreement = document.querySelector('.popup_type_agreement');
-
-
     }
 
     _liked() {
         return this._data.likes.some((score) => {
-            // console.log(score._id);
             return score._id === this._userId;
         })
     }
@@ -61,25 +53,10 @@ export class Card {
     }
 
     _setEventListeners() {
-        /* Удаление карточки */
-        // this._buttonDelete.addEventListener('click', () => {
-        //     this.popupAgreement.classList.add('popup_open');
-        //     this.agreementSubmitButton.addEventListener('click', (evt) => {
-        //         console.log(evt.currentTarget);
-        //         if (evt.target === evt.currentTarget) {
-        //             this._element.remove();
-        //             console.log(1);
-        //         }
-        //         this.popupAgreement.classList.remove('popup_open');
-        //     })
-        // })
         this._buttonDelete.addEventListener('click', () => {
             this._handleRemoveCard(this._element, this._cardId);
         });
 
-
-
-        /* Лайк карточки */
         this._buttonLike.addEventListener('click', () => {
             // this._buttonLike.classList.toggle('element__like-button_active');
             if (this._hasLiked) {
@@ -91,16 +68,6 @@ export class Card {
 
             }
         });
-
-        // this._likeButton.addEventListener('click', () => {
-        //     if (this._isLiked) {
-        //       this._isLiked = false;
-        //       this._handleUnlike(this._cardId).then((res) => this.dislike(res.likes.length));
-        //     } else {
-        //       this._isLiked = true;
-        //       this._handleLike(this._cardId).then((res) => this.like(res.likes.length));
-        //     }
-        //   });
 
         this._elementPhoto.addEventListener('click', () => this.handleCardClick(this._data));
     }
@@ -124,7 +91,6 @@ export class Card {
         } else {
             this._likesScorer.textContent = 0;
         };
-        // console.log(this._userId === this._cardOwnerId);
         return this._element;
     }
 }

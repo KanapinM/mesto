@@ -1,11 +1,10 @@
 export class UserInfo {
-    constructor({ profileName, profileAbout }) {
+    constructor({ profileName, profileAbout, avatar }) {
         this._name = profileName;
         this._about = profileAbout;
         this._id = '';
-        this._avatar = '';
-        // this._inputName = document.querySelector('.popup__input_type_name');
-        // this._inputInterest = document.querySelector('.popup__input_type_interest');
+        this._avatar = avatar;
+
     }
 
     getUserId() {

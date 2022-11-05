@@ -22,8 +22,6 @@ export class PopupWithForm extends Popup {
     _replaceForm = (e) => {
         e.preventDefault();
         this._submitHandler(this.getInputValues());
-
-        this.close();
     }
 
     setEventListeners() {
