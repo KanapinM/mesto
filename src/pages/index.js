@@ -14,7 +14,6 @@ const userInfo = new UserInfo({ profileName, profileAbout, avatar });///
 function setTextForButton(submitButton, text) {
   submitButton.textContent = text;
 }
-console.log(userInfo);
 
 const section = new Section(renderer, cardsContainer)
 function renderer(data) {
@@ -54,7 +53,7 @@ function downloadPage() {
         id: user._id,
         avatar: user.avatar,
       });
-      avatar.style.backgroundImage = `url('${userInfo.getUserAvatar()}')`;
+      // avatar.style.backgroundImage = `url('${userInfo.getUserAvatar()}')`;
       return [user, cards];
     })
     .catch((err) => console.log(err))
@@ -64,7 +63,6 @@ function downloadPage() {
     .catch((err) => console.log(err));
 }
 downloadPage();
-
 
 
 const popupImage = new PopupWithImage(popupSelectorsImage);
@@ -88,9 +86,7 @@ function handleFormInfoSubmit(userData) {
   setTextForButton(buttonSubmitProfile, 'Сохранение...');
   api.editUserData(userData)
     .then(function (userData) {
-      console.log(userData);
       userInfo.setUserInfo(userData);
-      console.log(userData);
       popupUserInfo.close();
     })
     .catch(function (err) {
@@ -105,7 +101,6 @@ function handleFormAvatar(url) {
   api.changeAvatar(url.link)
     .then(function (responce) {
       userInfo.setUserInfo(responce);
-      avatar.style.backgroundImage = `url('${userInfo.getUserAvatar()}')`;
 
       popupChangeAvatar.close();
     })
