@@ -8,7 +8,7 @@ const apiConfig = {
     },
 }
 
-const cardsContainer = document.querySelector('.elements');
+const cardsContainer = document.querySelector('.cardsContainer');
 
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 const buttonAddCard = document.querySelector('.profile__add-button');
@@ -28,7 +28,7 @@ const inputAbout = document.querySelector('.popup__input_type_about');
 
 const avatar = document.querySelector('.profile__avatar');
 
-const selectors = document.querySelector('.element-template');
+const selectors = document.querySelector('.card-template');
 
 const popupSelectorsImage = {
     popup: 'popup_type_image',
@@ -62,4 +62,3 @@ const validationConfig = {
     errorClass: 'popup__input-error_active',
     error: '.popup__input-error'
 };
-

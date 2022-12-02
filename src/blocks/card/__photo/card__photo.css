@@ -1,4 +1,4 @@
-.element__photo {
+.card__photo {
     max-width: 282px;
     height: 282px;
     object-fit: cover;
@@ -8,6 +8,6 @@
     width: 100%;
 }
 
-.element__photo:hover {
+.card__photo:hover {
     opacity: 0.6;
 }
